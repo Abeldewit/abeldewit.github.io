@@ -47,14 +47,9 @@ header {
 	font-weight: 700;
 	display: block;
 	padding: 1em;
+	padding-left: 0;
 	color: white;
 	font-weight: bolder;
-}
-
-@media all and (max-width: 800px) {
-	.navigation {
-		justify-content: space-around;
-	}
 }
 
 .copyright {
@@ -72,7 +67,27 @@ header {
 }
 
 .name h4 {
+	font-size: 5vw;
 	font-weight: 200;
 	padding: 0;
 	margin: 0;
+}
+
+@media all and (max-width: 800px) {
+	.navigation {
+		justify-content: space-around;
+	}
+	.name h4 {
+		font-size: 8vw;
+	}
+}
+
+@media all and (max-width: 600px) {
+	.homebtn {
+		display: none;
+	}
+	
+	.name h4 {
+		font-size: 10vw;
+	}
 }
