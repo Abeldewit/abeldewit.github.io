@@ -9,6 +9,7 @@ body {
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
+	padding-bottom: 0;
 	margin-left: 0px;
 	font-style: normal;
 	font-weight: 200;
@@ -17,8 +18,9 @@ body {
 .container {
 	display: flex;
 	flex-flow: row wrap;
-	margin-left: auto;
-	margin-right: auto;
+	justify-content: space-between;
+	height: auto;
+
 }
 /* Navigation */
 header {
@@ -63,13 +65,13 @@ header {
 	font-size: 5em;
 }
 .name h1 {
-	font-size: 5vw;
+	font-size: 0.8em;
 	font-weight: 200;
 	padding: 0;
 	margin: 0;
 }
 .name h2 {
-	font-size: 2vw;
+	font-size: 0.3em;
 	font-weight: 100;
 	padding: 0;
 	margin: 0;
@@ -83,24 +85,32 @@ header {
 		font-size: 8vw;
 	}
 	.welcome img {
-		height: 30vw;
+		height: 1em;
 	}
 }
 
-@media all and (max-width: 700px) {
+@media all and (max-width : 600px ){
 	.homebtn {
 		display: none;
 		visibility: hidden;
+	}
+	.pf {
+		display: none;
 	}
 }
 
 .welcome {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-evenly;
+	justify-content: center;
 	width: 100%;
 }
 .welcome img {
 	display: block;
-	height: 20vw;
+	height: 20em;
+}
+.welcome p {
+	display: block;
+	width: auto;
+	max-width: 20em;
 }
