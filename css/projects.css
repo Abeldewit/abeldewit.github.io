@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800&display=swap');
+
+.title {
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	font-weight: 500;
+}
+
+
+
+@media screen and (max-width : 720px ){
+	.title div {
+		width: 15px;
+	}
+	.github-widget {
+		flex-flow: column wrap;
+		align-items: center;
+	}
+	.gw-repo-outer {
+		width: 50%;
+	}
+}
+
