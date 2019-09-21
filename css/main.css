@@ -160,6 +160,7 @@ header {
 }
 
 .nav-active {
+	z-index: 5;
 	transform: translateX(0%);
 }
 

@@ -6,8 +6,9 @@ const navSlide = () => {
 	const body = document.querySelector('.content');
 	
 	burger.addEventListener('click',() =>{
+		body.classList.toggle('content-faded');
 		nav.classList.toggle('nav-active');
-		body.classList.toggle('content-faded')
+		
 		
 		
 		navLinks.forEach((link, index)=>{
