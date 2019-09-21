@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+@media (max-width: 480px){
+	.navigation {
+		justify-content: space-between;
+	}
+	.homebtn {
+		display: none;
+		visibility: hidden;
+	}
+	.pf {
+		display: none;
+	}
+}
