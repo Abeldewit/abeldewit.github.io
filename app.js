@@ -9,12 +9,11 @@ const navSlide = () => {
 	
 	navLinks.forEach((link, index)=>{
 		link.addEventListener('click',()=>{
-			navBar();
+			if(getComputedStyle(burger, null).display == "block") {
+				navBar();
+			}
 		});
-		navBar();
-	})
-	
-	
+	})		
 }
 
 function navBar() {
@@ -24,6 +23,7 @@ function navBar() {
 	const body = document.querySelector('.content');
 	body.classList.toggle('content-faded');
 	nav.classList.toggle('nav-active');
+	
 	
 	navLinks.forEach((link, index)=>{
 		if(link.style.animation) {

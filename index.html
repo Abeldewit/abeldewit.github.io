@@ -1,39 +1,32 @@
 <!doctype html>
 <html lang="en-US">
 <head>
-<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#000000">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Abel</title>
 	<link href="css/main.css" rel="stylesheet" type="text/css">
-	<link href="css/phone.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 <!-- Main Container -->
 <div class="container"> 
   <!-- Navigation -->
   <header>
-	<nav class="navigation">
-		<div>
-		<h4 class="logo">ABEL</h4></div>
-	  <ul class="nav-links">
-		<li class="homebtn"><a href="#hero">HOME</a></li>
-		<li><a href="#projects">PROJECTS</a></li>
-		<li><a href="#about">ABOUT</a></li>
-		<li> <a href="#contact">CONTACT</a></li>
-	  </ul>
-		<div class="burger">
-			<div class="l1"></div>
-			<div class="l2"></div>
-			<div class="l3"></div>
-		</div>
-	</nav>
+	  <div id="nav-placeholder">
+	  </div>
+	  
+	<script>
+		$(function(){
+  			$("#nav-placeholder").load("components/nav.html");
+		});
+	</script>
   </header>
 	<span class="content">
   <section class="name">
-		<h1>ABEL DE WIT</h1>
+		<h1>ABEL</h1>
 	  	<h2>Student / Data Scientist / Photographer</h2>
 	</section>
 	<section class="welcome">
@@ -43,9 +36,9 @@
     <img src="images/pf.png" alt="" class="pf"/> </section>
 	
   <div class="copyright"><p>&copy;2019 - <strong>Abel de Wit</strong></p></div>
-	</span>
+  </span>
 </div>
 <!-- Main Container Ends -->
-	<script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
