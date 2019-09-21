@@ -2,14 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Untitled Document</title>
+<title>Abel</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<? php include 'components/nav.php'; ?>
-	</div>
+	<div id="nav-placeholder">
+	  </div>
+	  
+	<script>
+		$(function(){
+  			$("#nav-placeholder").load("nav.html");
+		});
+	</script>
 </body>
 </html>
