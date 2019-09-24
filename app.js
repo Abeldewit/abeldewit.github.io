@@ -29,7 +29,7 @@ function navBar() {
 		if(link.style.animation) {
 			link.style.animation = "";
 		} else {
-			link.style.animation = `navlinkFade 0.5s ease forwards ${index / 5 + 0.5}s`;
+			link.style.animation = `navlinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
 		}
 	});
 }

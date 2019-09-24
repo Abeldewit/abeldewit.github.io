@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800&display=swap');
+
+.title {
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: space-around;
+	align-items: center;
+	font-weight: 500;
+}
+.info p {
+	text-align: center;
+	line-height: 30px;
+}
+
+.info a {
+	text-decoration: none;
+	color: white;
+}
+
+
+
+
+@media screen and (max-width : 720px ){
+	.title div {
+		width: 15px;
+	}
+	.github-widget {
+		flex-flow: column wrap;
+		align-items: center;
+	}
+	.gw-repo-outer {
+		width: 50%;
+	}
+}
+
+
+.socials {
+	display: flex;
+	justify-content: space-around;
+	min-width: 30vw;
+}
+
+.socialCon {
+	width: auto;
+	max-height: 40px;
+}
