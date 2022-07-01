@@ -1,0 +1,32 @@
+.resume__header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10rem;
+}
+
+.resume__header-content__title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.resume__header-content__title-name {
+    font-weight: 800;
+    font-size: 62px;
+    line-height: 75px;
+    letter-spacing:  -0.04em;
+}
+
+.resume__header-content__title h1,
+.resume__header-content__title h2 {
+    color: #FFF;
+    font-family: var(--font-family);
+}
+
+.resume__header-content__about p {
+    color: #FFF;
+    font-family: var(--font-family);
+}
