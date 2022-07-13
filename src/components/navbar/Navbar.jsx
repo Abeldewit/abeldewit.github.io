@@ -1,29 +1,29 @@
-import React, { useState } from 'react'
-import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
-import './navbar.css';
+import React from 'react'
 
-const Menu = () => (
-  <>
-  <p><a href="#home">Home</a></p>
-  <p><a href="#experience">Experience</a></p>
-  <p><a href="#projects">Projects</a></p>
-  <p><a href="#links">Links</a></p>
-  </>
-)
+const navigation = [
+  { name: 'Home', href: '#' },
+  { name: 'Experience', href: '#' },
+  { name: 'Education', href: '#' },
+  { name: 'Projects', href: '#' },
+]
 
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <div className='resume__navbar'>
-      <div className='resume__navbar-links'>
-
-        <div className='resume__navbar-links_logo'>
-          <img src="" alt="logo"></img>
-        </div>
-
-        <div className='resume__navbar-links_container'>
-          <Menu />
-        </div>
+    <div className="flex items-center justify-between py-5">
+      <div className="pl-5">
+        <h1 className="text-xl font-extrabold">ABEL</h1>
+      </div>
+      <div className="hidden sm:flex items-center">
+        {navigation.map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            className="px-4 font-medium text-base"
+          >
+            {item.name}
+          </a>
+        ))}
       </div>
     </div>
   )
