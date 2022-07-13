@@ -1,19 +1,21 @@
-import React from 'react'
+import { Navbar } from './components'
+import { Header, Experience } from './containers'
+import './App.css';
 
-import { Header } from './containers'
-import { Navbar, WorkCard } from './components'
-import './App.css'
-
-const App = () => {
+function App() {
   return (
     <div className="App">
-        <div className="gradient__bg">
+      <div className='
+        bg-gray-100
+        '>
+        <div>
           <Navbar />
           <Header />
-          <WorkCard />
+          <Experience />
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
