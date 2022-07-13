@@ -1,33 +1,36 @@
-import React from 'react'
-import './header.css';
+// import { Fragment } from 'react'
+// import { Popover, Transition } from '@headlessui/react'
+// import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import  resume from '../../assets/Curiculum Vitae - Abel de Wit.pdf'
 
-const Header = () => {
+export default function Header() {
   return (
-    <div className='resume__header section__padding'>
-        <div className='resume__header-content'>
-            <div className='resume__header-content__title'>
-                <h1 className='resume__header-content__title-name'>
-                    Abel de Wit
-                </h1>
-                <h2 className='resume__header-content__title-subtitle'>
-                    AI Engineer | Tinkerer
-                </h2>
-            </div>
-            <div className='resume__header-content__about'>
-                <p>
-                I am currently following the Artificial Intelligence master at Maastricht University. 
-                Within this field I am mainly interested in Natural Language Processing, Computer Vision, 
-                Anomaly Detection, and Image Classification & Generation. 
-                
-                Next to that I am active in the Machine Learning Club, a group of enthusiastic students that discuss 
-                papers for a better understanding of the state of the art Machine Learning techniques.
-                I am also active within my student association by filling positions in multiple committees, 
-                that are active in public relations and multi-media.
-                </p>
-            </div>
+    <div className="flex flex-col items-center px-10 pt-2 pb-10 h-full md:pb-20 md:h-screen md:justify-around md:flex-row ">
+      <div id="Title" className="flex flex-col">
+        <div className="flex flex-row justify-between items-center sm:block ">
+          <h1 className="text-2xl md:text-4xl font-extrabold">Abel de Wit</h1>
+          <h2 className="text-xl md:text-2xl font-normal">AI Engineer</h2>
         </div>
+        <p className="max-w-md w-auto md:w-10/12 text-md pt-2">
+          I am following the Msc. Artificial Intelligence at Maastricht University. 
+          Within this field I am mainly interested in Natural Language Processing, Computer Vision, 
+          and Anomaly Detection. 
+        </p>
+        <div className="rounded-md shadow w-fit bg-slate-500 mt-2">
+          {/* <a
+            href={resume}
+            className="flex w-full sm:hidden text-white py-1 px-3"
+            >Download Resume</a> */}
+          <a
+            href={resume}
+            className="hidden w-full font-extrabold md:flex text-white py-1 px-3"
+            download
+            >Download Resume</a>
+        </div>
+      </div>
+      <div id="Picture" className="hidden md:flex flex-col">
+        <h1 className="text-2xl font-extrabold">PICTURE</h1>
+      </div>
     </div>
   )
 }
-
-export default Header
