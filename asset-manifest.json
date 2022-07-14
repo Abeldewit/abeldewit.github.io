@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.342a3f44.css",
-    "main.js": "/static/js/main.322de066.js",
+    "main.css": "/static/css/main.39a2c35f.css",
+    "main.js": "/static/js/main.a6faf0f5.js",
     "static/js/787.1fc64f2b.chunk.js": "/static/js/787.1fc64f2b.chunk.js",
     "static/media/Curiculum Vitae - Abel de Wit.pdf": "/static/media/Curiculum Vitae - Abel de Wit.41aa92916871c3ebaa46.pdf",
+    "static/media/Profile.png": "/static/media/Profile.7ca913fa58b2a80c11fb.png",
     "index.html": "/index.html",
-    "main.342a3f44.css.map": "/static/css/main.342a3f44.css.map",
-    "main.322de066.js.map": "/static/js/main.322de066.js.map",
+    "main.39a2c35f.css.map": "/static/css/main.39a2c35f.css.map",
+    "main.a6faf0f5.js.map": "/static/js/main.a6faf0f5.js.map",
     "787.1fc64f2b.chunk.js.map": "/static/js/787.1fc64f2b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.342a3f44.css",
-    "static/js/main.322de066.js"
+    "static/css/main.39a2c35f.css",
+    "static/js/main.a6faf0f5.js"
   ]
 }
