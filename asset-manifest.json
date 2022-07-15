@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.8ccd3fca.css",
-    "main.js": "/static/js/main.410863ad.js",
+    "main.css": "/static/css/main.49ba9da6.css",
+    "main.js": "/static/js/main.458b9f33.js",
     "static/js/787.1fc64f2b.chunk.js": "/static/js/787.1fc64f2b.chunk.js",
     "static/media/Curiculum Vitae - Abel de Wit.pdf": "/static/media/Curiculum Vitae - Abel de Wit.41aa92916871c3ebaa46.pdf",
     "static/media/Profile.png": "/static/media/Profile.7ca913fa58b2a80c11fb.png",
+    "static/media/reykjavik.jpeg": "/static/media/reykjavik.3a5e81829f75ce45b932.jpeg",
+    "static/media/maastricht.png": "/static/media/maastricht.ea8f5236250041c810d3.png",
+    "static/media/capgemini.png": "/static/media/capgemini.450e0bda47393a9bd54b.png",
+    "static/media/lightyear.png": "/static/media/lightyear.69c69cf42488382e8d7f.png",
     "index.html": "/index.html",
-    "main.8ccd3fca.css.map": "/static/css/main.8ccd3fca.css.map",
-    "main.410863ad.js.map": "/static/js/main.410863ad.js.map",
+    "main.49ba9da6.css.map": "/static/css/main.49ba9da6.css.map",
+    "main.458b9f33.js.map": "/static/js/main.458b9f33.js.map",
     "787.1fc64f2b.chunk.js.map": "/static/js/787.1fc64f2b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8ccd3fca.css",
-    "static/js/main.410863ad.js"
+    "static/css/main.49ba9da6.css",
+    "static/js/main.458b9f33.js"
   ]
 }
