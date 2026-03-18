@@ -43,12 +43,20 @@
 
             <!-- Card top row: logo + title + badge -->
             <header class="card-head">
+              <!-- Show logo image if available, otherwise show initials -->
               <img
                 v-if="item.logo"
                 :src="item.logo"
                 :alt="item.org"
                 class="org-logo"
               />
+              <div
+                v-else
+                class="org-logo org-initials"
+                :style="{ background: item.color + '18', color: item.color, border: `1.5px solid ${item.color}30` }"
+              >
+                {{ item.org.charAt(0) }}
+              </div>
               <div class="card-title-group">
                 <h3 class="card-role">{{ item.role }}</h3>
                 <p class="card-org" :style="{ color: item.color }">{{ item.org }}</p>
@@ -79,6 +87,26 @@
           </article>
         </div>
       </div>
+
+      <!-- Certifications -->
+      <div class="certs-wrap reveal">
+        <h3 class="certs-heading">Certifications</h3>
+        <div class="certs-grid">
+          <div
+            v-for="cert in certs"
+            :key="cert.name"
+            class="cert-card glass-card"
+          >
+            <!-- Coloured left border accent -->
+            <div class="cert-accent" :style="{ background: cert.color }" />
+            <div class="cert-info">
+              <p class="cert-name">{{ cert.name }}</p>
+              <p class="cert-meta">{{ cert.issuer }} · {{ cert.year }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 </template>
@@ -94,15 +122,15 @@ useReveal('#experience')
 // Items are shown top to bottom — put newest first.
 const items = [
   {
-    type:        'Education',
-    role:        'MSc Artificial Intelligence',
-    org:         'Maastricht University',
-    period:      '2021 – Present',
-    location:    'Maastricht, Netherlands',
-    color:       '#10b981',
-    logo:        '/logos/maastricht.jpeg',
-    description: "Master's programme focusing on NLP, Computer Vision, and Anomaly Detection. My thesis investigated crop classification in satellite imagery using deep learning.",
-    tags:        ['NLP', 'Computer Vision', 'Machine Learning', 'Research', 'Python'],
+    type:        'Work',
+    role:        'Data Engineering Consultant',
+    org:         'Harvest',
+    period:      'Sep 2023 – Present',
+    location:    'Amsterdam, Netherlands',
+    color:       '#6d28d9',
+    logo:        null,   // add /logos/harvest.png once you have the logo
+    description: 'Data engineering consultant completing Harvest\'s intensive year-long training programme. Working with clients across industries to design and build data pipelines, lakehouse architectures, and analytics solutions.',
+    tags:        ['Azure', 'Databricks', 'Data Engineering', 'SQL', 'Python', 'Consulting'],
   },
   {
     type:        'Work',
@@ -110,9 +138,9 @@ const items = [
     org:         'Capgemini',
     period:      'Feb 2022 – Jul 2022',
     location:    'Utrecht, Netherlands',
-    color:       '#3b82f6',
+    color:       '#1d4ed8',
     logo:        '/logos/capgemini.jpeg',
-    description: 'Researched multi-label crop classification in Sentinel-2 satellite imagery using Deep Learning. Benchmarked Vision Transformers (ViT) against CNN baselines, exploring few-shot generalisation.',
+    description: 'Researched multi-label crop classification in Sentinel-2 satellite imagery using Deep Learning. Benchmarked Vision Transformers (ViT) against CNN baselines, exploring few-shot generalisation at scale.',
     tags:        ['Deep Learning', 'Vision Transformers', 'PyTorch', 'Satellite Imagery', 'Python'],
   },
   {
@@ -121,9 +149,9 @@ const items = [
     org:         'Lightyear',
     period:      'Feb 2022 – Jul 2022',
     location:    'Helmond, Netherlands',
-    color:       '#ec4899',
+    color:       '#db2777',
     logo:        '/logos/lightyear.jpeg',
-    description: 'Built a weather-data API and developed ML models to detect optimal parking orientation for solar EVs, maximising solar energy capture.',
+    description: 'Built a weather-data API and developed ML models to detect optimal parking orientation for solar EVs, maximising solar energy capture throughout the day.',
     tags:        ['Machine Learning', 'Data Engineering', 'REST APIs', 'SQL', 'Python'],
   },
   {
@@ -132,10 +160,10 @@ const items = [
     org:         'Lightyear',
     period:      'Sep 2021 – Jan 2022',
     location:    'Helmond, Netherlands',
-    color:       '#ec4899',
+    color:       '#db2777',
     logo:        '/logos/lightyear.jpeg',
-    description: 'Created a Business Intelligence tool that automated patent search, clustering, and competitive landscape analysis. Built interactive dashboards for the innovation team.',
-    tags:        ['Business Intelligence', 'NLP', 'Data Visualisation', 'Dashboards', 'Python'],
+    description: 'Researched text embedding from patents and built a Business Intelligence tool for automated competitor analysis and IP landscape mapping.',
+    tags:        ['NLP', 'Text Embeddings', 'Business Intelligence', 'Dashboards', 'Python'],
   },
   {
     type:        'Education',
@@ -143,11 +171,41 @@ const items = [
     org:         'Maastricht University',
     period:      'Nov 2020 – Dec 2021',
     location:    'Maastricht, Netherlands',
-    color:       '#10b981',
+    color:       '#047857',
     logo:        '/logos/maastricht.jpeg',
     description: 'Led tutorial sessions and graded assignments for undergraduate courses in Data Science and Knowledge Engineering.',
     tags:        ['Teaching', 'Data Science', 'Python', 'Mentoring'],
   },
+  {
+    type:        'Education',
+    role:        'MSc Artificial Intelligence',
+    org:         'Maastricht University',
+    period:      '2020 – 2022',
+    location:    'Maastricht, Netherlands',
+    color:       '#047857',
+    logo:        '/logos/maastricht.jpeg',
+    description: "Master's programme focusing on NLP, Computer Vision, and Anomaly Detection. Graduated with a thesis on deep learning for satellite crop classification.",
+    tags:        ['NLP', 'Computer Vision', 'Machine Learning', 'Research', 'Python'],
+  },
+  {
+    type:        'Education',
+    role:        'BSc Data Science & Artificial Intelligence',
+    org:         'Maastricht University',
+    period:      '2016 – 2020',
+    location:    'Maastricht, Netherlands',
+    color:       '#047857',
+    logo:        '/logos/maastricht.jpeg',
+    description: "Bachelor's programme in Data Science and AI. Covered statistics, machine learning, databases, algorithms, and software engineering.",
+    tags:        ['Data Science', 'AI', 'Statistics', 'Software Engineering', 'Python'],
+  },
+]
+
+// ── Certifications ─────────────────────────────────────────────────────────
+// Shown as small badge cards below the timeline
+const certs = [
+  { name: 'Azure Fundamentals (AZ-900)',         issuer: 'Microsoft',         year: '2023', color: '#0078d4' },
+  { name: 'Databricks Lakehouse Fundamentals',   issuer: 'Databricks',        year: '2023', color: '#e87722' },
+  { name: 'Data Intelligence Track',             issuer: 'Capgemini Academy', year: '2022', color: '#1d4ed8' },
 ]
 </script>
 
@@ -162,7 +220,7 @@ const items = [
   position: absolute;
   top: -100px; right: -200px;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.11) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -300,9 +358,71 @@ const items = [
   font-size: 0.72rem;
   padding: 0.22rem 0.6rem;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--tag-color);
+  font-family: var(--font-mono);
+}
+
+/* Org logo fallback: initials badge */
+.org-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+/* ── Certifications ── */
+.certs-wrap {
+  max-width: 740px;
+  margin: 1rem auto 0;
+}
+.certs-heading {
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  padding-left: 58px;  /* align with timeline cards */
+}
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+  padding-left: 58px;
+}
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.cert-card:hover { transform: translateY(-2px); }
+.cert-accent {
+  width: 3px;
+  align-self: stretch;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.cert-info { min-width: 0; }
+.cert-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cert-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
   font-family: var(--font-mono);
 }
 
@@ -310,5 +430,7 @@ const items = [
   .timeline-line  { left: 8px; }
   .timeline-entry { padding-left: 36px; }
   .timeline-dot   { left: 0; width: 14px; height: 14px; }
+  .certs-heading,
+  .certs-grid     { padding-left: 0; }
 }
 </style>

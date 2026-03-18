@@ -128,10 +128,10 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 /* Glassmorphism: kicks in after user scrolls */
 .nav.scrolled {
-  background: rgba(5, 8, 22, 0.85);
+  background: rgba(247, 248, 255, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   padding: 0.55rem 0;
 }
 
@@ -172,10 +172,10 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 .nav-link:hover,
 .nav-link.active {
-  color: var(--text-primary);
-  background: rgba(124, 58, 237, 0.15);
+  color: var(--purple);
+  background: rgba(109, 40, 217, 0.08);
 }
-.nav-link.active { color: #a78bfa; }
+.nav-link.active { color: var(--purple); font-weight: 600; }
 
 /* ── CTA button ── */
 .nav-cta {
@@ -198,7 +198,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .hamburger span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--text-primary);
+  background: var(--purple);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform-origin: center;
@@ -214,8 +214,8 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   flex-direction: column;
   max-height: 0;
   overflow: hidden;
-  background: rgba(5, 8, 22, 0.97);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(247, 248, 255, 0.97);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   transition: max-height 0.35s ease, padding 0.35s ease;
 }
 .mobile-menu.open {
@@ -228,7 +228,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   font-size: 1rem;
   transition: color 0.2s;
 }
-.mobile-link:hover { color: var(--text-primary); }
+.mobile-link:hover { color: var(--purple); }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {

@@ -1,19 +1,20 @@
 <template>
   <!--
-    ParticleCanvas.vue — Animated particle background
-    ──────────────────────────────────────────────────
+    ParticleCanvas.vue — Animated coding-symbol background
+    ───────────────────────────────────────────────────────
     Renders onto an HTML <canvas> element using the Canvas 2D API.
     No external libraries — pure JavaScript animation loop.
 
     WHAT IT DOES:
-    1. Creates N coloured particles at random positions/velocities
-    2. Each frame: moves them, wraps them at screen edges, draws them as glowing dots
-    3. Draws fading lines between any two particles that are close to each other
-    4. Particles gently repel from the mouse cursor for interactivity
+    1. Creates N symbols (code snippets, AI/ML terms, math chars) at random
+       positions, velocities, sizes and colours
+    2. Each frame: moves them slowly, wraps them at screen edges, draws them
+       as text using ctx.fillText() — readable but slightly transparent
+    3. Draws fading lines between symbols that drift close to each other
+    4. Symbols gently repel from the mouse cursor
 
-    PERFORMANCE NOTE:
-    Uses requestAnimationFrame which only runs when the tab is visible,
-    and onUnmounted cancels the loop to prevent memory leaks.
+    CUSTOMISE:
+    Edit the SYMBOLS array to add your own terms, or CFG to tweak speed/count.
   -->
   <canvas ref="canvasRef" class="particle-canvas" />
 </template>
@@ -21,51 +22,71 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// Reference to the <canvas> DOM element
 const canvasRef = ref(null)
 
-// Internal variables (not reactive — we don't need Vue to track these)
-let ctx         = null    // Canvas 2D context
-let animId      = null    // requestAnimationFrame handle (for cancellation)
-let particles   = []      // Array of particle objects
-let mouse       = { x: -9999, y: -9999 }  // Current mouse position
+let ctx       = null
+let animId    = null
+let particles = []
+let mouse     = { x: -9999, y: -9999 }
 
-// ── Configuration ──────────────────────────────────────────────────────────
-// Edit these numbers to tune the effect
+// ── Symbols ───────────────────────────────────────────────────────────────
+// A mix of:
+//   • general coding syntax
+//   • AI / ML terms that represent Abel's work
+//   • math symbols common in machine learning
+const SYMBOLS = [
+  // Coding syntax
+  '</>',  '{ }',  '( )',  '=>',  '//',  '[ ]',  '&&',  '||',
+  'def',  'fn()',  'for',  'if',  '+=',  '**',  '0x1',  '?:',
+  // AI / ML / data terms
+  'AI',  'ML',  'NLP',  'CV',  'ViT',  'CNN',  'LLM',  'GPU',
+  'fit()',  'loss',  'epoch',  'grad',  'embed',  'token',
+  // Math / stats symbols
+  'λ',  '∑',  '∂',  'σ',  'μ',  '∈',  '∇',  'argmax',
+  // Abel-specific flavour
+  'drone',  'git',  'sql',  'api',  '.py',  'nuxt',
+]
+
+// ── Configuration ─────────────────────────────────────────────────────────
 const CFG = {
-  count:           75,     // How many particles
-  maxSpeed:        0.4,    // Maximum velocity (pixels per frame)
-  minSize:         1,      // Smallest dot radius (px)
-  maxSize:         2.5,    // Largest dot radius (px)
-  connectDist:     130,    // Draw a line if two particles are within this many px
-  mouseRepelDist:  140,    // Distance at which particles flee the mouse
-  mouseRepelForce: 1.8,    // How strongly they flee
-  // Particle colours — semi-transparent so they layer nicely
+  count:           55,     // Number of floating symbols
+  maxSpeed:        0.3,    // Max pixels-per-frame velocity
+  minFontSize:     11,     // Smallest symbol font size (px)
+  maxFontSize:     17,     // Largest symbol font size (px)
+  connectDist:     120,    // Draw a line between symbols closer than this
+  mouseRepelDist:  130,    // Radius of mouse repulsion effect
+  mouseRepelForce: 1.6,    // Repulsion strength
+  // Colours — vivid but semi-transparent so they sit lightly on the white bg
   colors: [
-    'rgba(124, 58, 237, 0.9)',   // purple
-    'rgba(236, 72, 153, 0.9)',   // pink
-    'rgba(59, 130, 246, 0.9)',   // blue
-    'rgba(6, 182, 212, 0.8)',    // cyan
-    'rgba(16, 185, 129, 0.8)',   // green
+    'rgba(109,  40, 217, 0.55)',   // purple  (#6d28d9)
+    'rgba(219,  39, 119, 0.50)',   // pink    (#db2777)
+    'rgba( 29,  78, 216, 0.50)',   // blue    (#1d4ed8)
+    'rgba( 14, 116, 144, 0.50)',   // cyan    (#0e7490)
+    'rgba(  4, 120,  87, 0.45)',   // green   (#047857)
   ],
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────
 
-// Create one particle with random properties
+// Pick a random item from an array
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
+
+// Create one symbol particle with random properties
 function makeParticle(w, h) {
+  const fontSize = CFG.minFontSize + Math.random() * (CFG.maxFontSize - CFG.minFontSize)
   return {
-    x:       Math.random() * w,
-    y:       Math.random() * h,
-    vx:      (Math.random() - 0.5) * CFG.maxSpeed * 2,
-    vy:      (Math.random() - 0.5) * CFG.maxSpeed * 2,
-    r:       CFG.minSize + Math.random() * (CFG.maxSize - CFG.minSize),
-    color:   CFG.colors[Math.floor(Math.random() * CFG.colors.length)],
-    opacity: 0.4 + Math.random() * 0.6,
+    x:        Math.random() * w,
+    y:        Math.random() * h,
+    vx:       (Math.random() - 0.5) * CFG.maxSpeed * 2,
+    vy:       (Math.random() - 0.5) * CFG.maxSpeed * 2,
+    symbol:   pick(SYMBOLS),         // which text to draw
+    fontSize,                        // font size in px
+    color:    pick(CFG.colors),      // rgba color string
+    opacity:  0.35 + Math.random() * 0.55,
   }
 }
 
-// Initialise canvas size and create particles
+// Initialise canvas dimensions and create all particles
 function init() {
   const canvas  = canvasRef.value
   canvas.width  = window.innerWidth
@@ -76,45 +97,43 @@ function init() {
   )
 }
 
-// ── Animation loop ─────────────────────────────────────────────────────────
+// ── Animation loop ────────────────────────────────────────────────────────
 function loop() {
   const { width, height } = canvasRef.value
-
-  // Clear the previous frame
   ctx.clearRect(0, 0, width, height)
 
-  // ── Update and draw each particle ──
+  // ── Move and draw each symbol ──
   for (const p of particles) {
     // Move
     p.x += p.vx
     p.y += p.vy
 
-    // Wrap around screen edges (particles re-enter from the opposite side)
-    if (p.x < 0) p.x = width
-    if (p.x > width)  p.x = 0
-    if (p.y < 0) p.y = height
-    if (p.y > height) p.y = 0
+    // Wrap around screen edges so symbols never disappear
+    if (p.x < -30)          p.x = width  + 30
+    if (p.x > width  + 30)  p.x = -30
+    if (p.y < -30)          p.y = height + 30
+    if (p.y > height + 30)  p.y = -30
 
-    // Mouse repulsion: push particle away if cursor is nearby
+    // Mouse repulsion: nudge away from cursor
     const dx   = p.x - mouse.x
     const dy   = p.y - mouse.y
-    const dist = Math.hypot(dx, dy)  // Math.hypot = √(dx²+dy²)
+    const dist = Math.hypot(dx, dy)
     if (dist < CFG.mouseRepelDist && dist > 0) {
-      const strength = (CFG.mouseRepelDist - dist) / CFG.mouseRepelDist
-      p.x += (dx / dist) * strength * CFG.mouseRepelForce
-      p.y += (dy / dist) * strength * CFG.mouseRepelForce
+      const force = (CFG.mouseRepelDist - dist) / CFG.mouseRepelDist
+      p.x += (dx / dist) * force * CFG.mouseRepelForce
+      p.y += (dy / dist) * force * CFG.mouseRepelForce
     }
 
-    // Draw dot
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-    ctx.fillStyle   = p.color
-    ctx.globalAlpha = p.opacity
-    ctx.fill()
-    ctx.globalAlpha = 1
+    // Draw the symbol as text
+    // ctx.font format: "weight size family"
+    ctx.font         = `600 ${p.fontSize}px 'Space Mono', monospace`
+    ctx.fillStyle    = p.color
+    ctx.globalAlpha  = p.opacity
+    ctx.fillText(p.symbol, p.x, p.y)
+    ctx.globalAlpha  = 1
   }
 
-  // ── Draw connecting lines between nearby pairs ──
+  // ── Draw connecting lines between nearby symbol pairs ──
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const a    = particles[i]
@@ -122,13 +141,13 @@ function loop() {
       const dist = Math.hypot(a.x - b.x, a.y - b.y)
 
       if (dist < CFG.connectDist) {
-        // Line fades as particles move apart
-        const alpha = (1 - dist / CFG.connectDist) * 0.25
+        // Fade the line out as distance increases
+        const alpha = (1 - dist / CFG.connectDist) * 0.18
         ctx.beginPath()
         ctx.moveTo(a.x, a.y)
         ctx.lineTo(b.x, b.y)
-        ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`
-        ctx.lineWidth   = 0.8
+        ctx.strokeStyle = `rgba(109, 40, 217, ${alpha})`
+        ctx.lineWidth   = 0.7
         ctx.stroke()
       }
     }
@@ -137,9 +156,9 @@ function loop() {
   animId = requestAnimationFrame(loop)
 }
 
-// ── Event listeners ────────────────────────────────────────────────────────
+// ── Event listeners ───────────────────────────────────────────────────────
 function onMouseMove(e) { mouse.x = e.clientX; mouse.y = e.clientY }
-function onResize()     { init() /* re-init keeps particle count correct */ }
+function onResize()     { init() }
 
 onMounted(() => {
   init()
@@ -158,9 +177,9 @@ onUnmounted(() => {
 <style scoped>
 .particle-canvas {
   position: absolute;
-  inset: 0;           /* shorthand for top/right/bottom/left: 0 */
+  inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;  /* clicks pass through to the content below */
+  pointer-events: none;  /* let all clicks pass through to the page */
 }
 </style>

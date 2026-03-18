@@ -139,7 +139,7 @@ const projects = [
   position: absolute;
   bottom: -80px; left: -180px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(4, 120, 87, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -203,17 +203,17 @@ const projects = [
 .icon-link {
   width: 32px; height: 32px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(109, 40, 217, 0.06);
+  border: 1px solid rgba(109, 40, 217, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
+  color: var(--purple);
   transition: var(--ease);
 }
 .icon-link:hover {
-  color: var(--text-primary);
-  background: rgba(124, 58, 237, 0.2);
+  color: white;
+  background: var(--purple);
   border-color: var(--purple);
 }
 
@@ -244,9 +244,9 @@ const projects = [
   font-size: 0.7rem;
   padding: 0.2rem 0.55rem;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-secondary);
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--tag-color);
   font-family: var(--font-mono);
 }
 </style>

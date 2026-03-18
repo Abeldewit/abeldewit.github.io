@@ -29,8 +29,8 @@ const year = new Date().getFullYear()
 
 <style scoped>
 .footer {
-  background: #030610;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   padding: 2.5rem 2rem;
   text-align: center;
 }
@@ -53,6 +53,6 @@ const year = new Date().getFullYear()
 }
 .footer-copy {
   font-size: 0.78rem;
-  color: #2d3748;
+  color: var(--text-muted);
 }
 </style>

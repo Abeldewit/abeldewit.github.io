@@ -116,7 +116,7 @@ useReveal('#contact')
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 400px;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(219, 39, 119, 0.09) 0%, transparent 70%);
   pointer-events: none;
 }
 

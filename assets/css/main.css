@@ -9,31 +9,36 @@
 /* ── CSS Custom Properties (variables) ────────────────────── */
 /* Change these to restyle the entire site in one place.      */
 :root {
-  /* Backgrounds */
-  --bg-primary:   #050816;  /* Main dark background */
-  --bg-secondary: #070a1a;  /* Slightly lighter for alternating sections */
+  /* Backgrounds — light theme */
+  --bg-primary:   #f7f8ff;  /* Soft white with a hint of lavender */
+  --bg-secondary: #eef1ff;  /* Slightly deeper for alternating sections */
 
-  /* Accent colors */
-  --purple: #7c3aed;
-  --pink:   #ec4899;
-  --blue:   #3b82f6;
-  --cyan:   #06b6d4;
-  --green:  #10b981;
+  /* Accent colors — deeper shades for contrast on light backgrounds */
+  --purple: #6d28d9;
+  --pink:   #db2777;
+  --blue:   #1d4ed8;
+  --cyan:   #0e7490;
+  --green:  #047857;
 
   /* Text */
-  --text-primary:   #f8fafc;  /* Bright white */
-  --text-secondary: #94a3b8;  /* Muted grey-blue */
-  --text-muted:     #475569;  /* Very muted */
+  --text-primary:   #0f172a;  /* Near-black navy */
+  --text-secondary: #475569;  /* Medium slate */
+  --text-muted:     #94a3b8;  /* Lighter slate */
 
   /* Named gradients */
-  --grad-purple-pink: linear-gradient(135deg, #7c3aed, #ec4899);
-  --grad-blue-cyan:   linear-gradient(135deg, #3b82f6, #06b6d4);
-  --grad-green-blue:  linear-gradient(135deg, #10b981, #3b82f6);
+  --grad-purple-pink: linear-gradient(135deg, #6d28d9, #db2777);
+  --grad-blue-cyan:   linear-gradient(135deg, #1d4ed8, #0e7490);
+  --grad-green-blue:  linear-gradient(135deg, #047857, #1d4ed8);
 
-  /* Glassmorphism card */
-  --glass-bg:     rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.10);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  /* Glassmorphism card — frosted white glass on light background */
+  --glass-bg:     rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.07);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+
+  /* Tag chips (used in experience + project cards) */
+  --tag-bg:     rgba(109, 40, 217, 0.07);
+  --tag-border: rgba(109, 40, 217, 0.18);
+  --tag-color:  #5b21b6;
 
   /* Layout */
   --max-width:      1100px;
@@ -137,10 +142,10 @@ a   { color: inherit; text-decoration: none; }
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--glass-border);
+  border: 1.5px solid rgba(109, 40, 217, 0.25);
 }
 .btn-outline:hover {
-  background: var(--glass-bg);
+  background: rgba(109, 40, 217, 0.06);
   border-color: var(--purple);
   transform: translateY(-2px);
 }
@@ -214,5 +219,5 @@ a   { color: inherit; text-decoration: none; }
 
 /* ── Custom scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
 ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }

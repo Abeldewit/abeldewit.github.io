@@ -211,21 +211,21 @@ onUnmounted(() => clearTimeout(timer))
   animation: float 9s ease-in-out infinite;
 }
 .blob-purple {
-  width: 550px; height: 550px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.22) 0%, transparent 70%);
-  top: -120px; left: -120px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(109, 40, 217, 0.18) 0%, transparent 65%);
+  top: -140px; left: -140px;
   animation-delay: 0s;
 }
 .blob-pink {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.18) 0%, transparent 70%);
-  top: 35%; right: -80px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(219, 39, 119, 0.14) 0%, transparent 65%);
+  top: 30%; right: -80px;
   animation-delay: -3.5s;
 }
 .blob-cyan {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, transparent 70%);
-  bottom: 8%; left: 28%;
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(14, 116, 144, 0.13) 0%, transparent 65%);
+  bottom: 8%; left: 25%;
   animation-delay: -6s;
 }
 
@@ -307,19 +307,19 @@ onUnmounted(() => clearTimeout(timer))
 .social-btn {
   width: 44px; height: 44px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(109, 40, 217, 0.07);
+  border: 1.5px solid rgba(109, 40, 217, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-secondary);
+  color: var(--purple);
   transition: var(--ease);
 }
 .social-btn:hover {
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(109, 40, 217, 0.14);
   border-color: var(--purple);
-  color: #a78bfa;
   transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(109, 40, 217, 0.2);
 }
 
 /* ── Scroll hint ──
@@ -333,7 +333,7 @@ onUnmounted(() => clearTimeout(timer))
 }
 .scroll-mouse {
   width: 24px; height: 38px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(109, 40, 217, 0.25);
   border-radius: 12px;
   display: flex;
   justify-content: center;
