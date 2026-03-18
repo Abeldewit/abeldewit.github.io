@@ -3,18 +3,18 @@
     HeroSection.vue — Full-screen landing section
     ──────────────────────────────────────────────
     Layers (back to front):
-      1. Dark background (#050816)
-      2. ParticleCanvas (animated dots + lines)
-      3. Decorative glowing "blob" divs (blurred circles)
-      4. Main text content + buttons
-      5. Scroll indicator arrow at the bottom
+      1. Light background (var(--bg-primary), a soft white)
+      2. ParticleCanvas (floating coding symbols + connecting lines)
+      3. Decorative glowing "blob" divs (blurred colour circles for ambience)
+      4. Main text content + CTA buttons
+      5. Scroll hint indicator at the bottom
   -->
   <section id="home" class="hero">
 
-    <!-- Layer 1+2: particles -->
+    <!-- Layer 1+2: light background + floating coding-symbol particles -->
     <ParticleCanvas />
 
-    <!-- Layer 3: ambient glow blobs -->
+    <!-- Layer 3: ambient colour blobs for background depth -->
     <div class="blob blob-purple" />
     <div class="blob blob-pink"   />
     <div class="blob blob-cyan"   />
@@ -43,9 +43,10 @@
 
       <!-- Short bio -->
       <p class="hero-bio reveal">
-        MSc Artificial Intelligence student at Maastricht University.
-        Passionate about NLP, Computer Vision and building things that matter.
-        Also a drone pilot &amp; photographer.
+        Forensic Data Scientist at the Nederlands Forensisch Instituut.
+        MEng in Artificial Intelligence from Maastricht University, with a background in
+        data engineering, machine learning, and NLP. Co-founder of Weevi.
+        Also: drone pilot &amp; photographer.
       </p>
 
       <!-- CTA buttons -->
@@ -122,11 +123,12 @@ import { useReveal } from '~/composables/useReveal'
 // ── Typing animation ──────────────────────────────────────────────────────────
 // Cycles through `roles` by typing and erasing each string character by character
 const roles = [
-  'AI Engineer',
-  'MSc Student',
+  'Forensic Data Scientist',
+  'Data Engineer',
+  'ML Engineer',
+  'Co-Founder',
   'Drone Pilot',
   'Photographer',
-  'NLP Researcher',
 ]
 
 const displayedRole = ref('')  // Text currently shown on screen
@@ -360,4 +362,21 @@ onUnmounted(() => clearTimeout(timer))
 .hero-content .reveal:nth-child(4) { transition-delay: 0.40s; }
 .hero-content .reveal:nth-child(5) { transition-delay: 0.50s; }
 .hero-content .reveal:nth-child(6) { transition-delay: 0.60s; }
+
+/* ── Mobile adjustments ── */
+@media (max-width: 640px) {
+  /* Reduce top/bottom padding so content isn't cramped below the navbar */
+  .hero-content { padding: 5.5rem 1.25rem 3rem; }
+
+  /* Tighten letter-spacing on the large name at small sizes */
+  .hero-name { letter-spacing: -1px; }
+
+  /* Stack CTA buttons vertically on very small screens */
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-buttons .btn { width: 100%; max-width: 260px; justify-content: center; }
+}
+
+@media (max-width: 400px) {
+  .hero-content { padding: 5rem 1rem 2.5rem; }
+}
 </style>
