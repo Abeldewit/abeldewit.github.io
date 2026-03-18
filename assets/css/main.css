@@ -9,36 +9,36 @@
 /* ── CSS Custom Properties (variables) ────────────────────── */
 /* Change these to restyle the entire site in one place.      */
 :root {
-  /* Backgrounds — light theme */
-  --bg-primary:   #f7f8ff;  /* Soft white with a hint of lavender */
-  --bg-secondary: #eef1ff;  /* Slightly deeper for alternating sections */
+  /* Backgrounds — warm light theme */
+  --bg-primary:   #fffbf7;  /* Soft warm white */
+  --bg-secondary: #fff3e8;  /* Warm cream for alternating sections */
 
-  /* Accent colors — deeper shades for contrast on light backgrounds */
-  --purple: #6d28d9;
-  --pink:   #db2777;
-  --blue:   #1d4ed8;
-  --cyan:   #0e7490;
-  --green:  #047857;
+  /* Accent colors — orange-oriented palette */
+  --orange: #c2410c;  /* Deep burnt orange — primary accent */
+  --amber:  #b45309;  /* Warm amber — secondary accent */
+  --red:    #dc2626;  /* Warm red — tertiary accent */
+  --gold:   #ca8a04;  /* Golden yellow */
+  --teal:   #0f766e;  /* Cool teal for contrast */
 
   /* Text */
-  --text-primary:   #0f172a;  /* Near-black navy */
-  --text-secondary: #475569;  /* Medium slate */
-  --text-muted:     #94a3b8;  /* Lighter slate */
+  --text-primary:   #1c0a00;  /* Near-black warm brown */
+  --text-secondary: #57534e;  /* Warm stone grey */
+  --text-muted:     #a8a29e;  /* Light stone */
 
   /* Named gradients */
-  --grad-purple-pink: linear-gradient(135deg, #6d28d9, #db2777);
-  --grad-blue-cyan:   linear-gradient(135deg, #1d4ed8, #0e7490);
-  --grad-green-blue:  linear-gradient(135deg, #047857, #1d4ed8);
+  --grad-orange-amber: linear-gradient(135deg, #c2410c, #b45309);
+  --grad-red-gold:     linear-gradient(135deg, #dc2626, #ca8a04);
+  --grad-teal-red:     linear-gradient(135deg, #0f766e, #dc2626);
 
-  /* Glassmorphism card — frosted white glass on light background */
-  --glass-bg:     rgba(255, 255, 255, 0.75);
+  /* Glassmorphism card — frosted warm glass on light background */
+  --glass-bg:     rgba(255, 255, 255, 0.78);
   --glass-border: rgba(0, 0, 0, 0.07);
   --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 
   /* Tag chips (used in experience + project cards) */
-  --tag-bg:     rgba(109, 40, 217, 0.07);
-  --tag-border: rgba(109, 40, 217, 0.18);
-  --tag-color:  #5b21b6;
+  --tag-bg:     rgba(194, 65, 12, 0.07);
+  --tag-border: rgba(194, 65, 12, 0.18);
+  --tag-color:  #9a3412;  /* orange-800 */
 
   /* Layout */
   --max-width:      1100px;
@@ -104,7 +104,7 @@ a   { color: inherit; text-decoration: none; }
 /* ── Gradient text ─────────────────────────────────────────── */
 /* Apply to a <span> inside a heading for a colorful word */
 .gradient-text {
-  background: var(--grad-purple-pink);
+  background: var(--grad-orange-amber);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -129,24 +129,24 @@ a   { color: inherit; text-decoration: none; }
 
 /* Filled gradient button */
 .btn-primary {
-  background: var(--grad-purple-pink);
+  background: var(--grad-orange-amber);
   color: white;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 4px 20px rgba(194, 65, 12, 0.4);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+  box-shadow: 0 8px 30px rgba(194, 65, 12, 0.6);
 }
 
 /* Outlined / ghost button */
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1.5px solid rgba(109, 40, 217, 0.25);
+  border: 1.5px solid rgba(194, 65, 12, 0.25);
 }
 .btn-outline:hover {
-  background: rgba(109, 40, 217, 0.06);
-  border-color: var(--purple);
+  background: rgba(194, 65, 12, 0.06);
+  border-color: var(--orange);
   transform: translateY(-2px);
 }
 
@@ -233,4 +233,4 @@ a   { color: inherit; text-decoration: none; }
 /* ── Custom scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }

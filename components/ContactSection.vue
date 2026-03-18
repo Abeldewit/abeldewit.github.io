@@ -23,7 +23,7 @@
 
         <!-- Email -->
         <a href="mailto:hello@abeldewit.com" class="contact-card glass-card reveal">
-          <div class="card-icon" style="background: var(--grad-purple-pink)">
+          <div class="card-icon" style="background: var(--grad-orange-amber)">
             <!-- Envelope icon -->
             <svg viewBox="0 0 24 24" fill="none" stroke="white"
                  stroke-width="2" stroke-linecap="round" width="22" height="22">
@@ -110,13 +110,13 @@ useReveal('#contact')
   overflow: hidden;
 }
 
-/* Pink/purple glow centred in section */
+/* Orange glow centred in section */
 .section-glow {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 400px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(194, 65, 12, 0.09) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -126,13 +126,13 @@ useReveal('#contact')
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--pink);
+  color: var(--amber);
   margin-bottom: 0.4rem;
 }
 
-/* Pink-purple gradient on heading accent */
+/* Orange-amber gradient on heading accent */
 .accent-pink {
-  background: linear-gradient(135deg, var(--pink), var(--purple));
+  background: linear-gradient(135deg, var(--amber), var(--orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -196,7 +196,7 @@ useReveal('#contact')
 }
 .contact-card:hover .card-arrow {
   transform: translateX(4px);
-  color: var(--purple);
+  color: var(--orange);
 }
 
 /* ── Big CTA ── */
