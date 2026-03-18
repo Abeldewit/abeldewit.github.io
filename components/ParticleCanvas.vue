@@ -36,20 +36,20 @@ let mouse     = { x: -9999, y: -9999 }
 //   • math symbols common in machine learning
 const SYMBOLS = [
   // Coding syntax
-  '</>',  '{ }',  '( )',  '=>',  '//',  '[ ]',  '&&',  '||',
-  'def',  'fn()',  'for',  'if',  '+=',  '**',  '0x1',  '?:',
+  '</>',  '{ }',  '( )',  '=>',  '//',  '[ ]',  '&&',
+  'def',  'fn()',  'for',  'if', 'while', 'yield',  '+=',  '**',  '0x1',  '?:',
   // AI / ML / data terms
-  'AI',  'ML',  'NLP',  'CV',  'ViT',  'CNN',  'LLM',  'GPU',
+  'AI',  'ML',  'NLP',  'CV',  'ViT',  'CNN', 'GPU',
   'fit()',  'loss',  'epoch',  'grad',  'embed',  'token',
   // Math / stats symbols
-  'λ',  '∑',  '∂',  'σ',  'μ',  '∈',  '∇',  'argmax',
+  'λ',  '∑',  'μ', '∇',  'argmax',
   // Abel-specific flavour
-  'drone',  'git',  'sql',  'api',  '.py',  'nuxt',
+  'drone', 'photo', 'books', 'git',  'sql',  'api',  '.py', 
 ]
 
 // ── Configuration ─────────────────────────────────────────────────────────
 const CFG = {
-  count:           55,     // Number of floating symbols
+  count:           75,     // Number of floating symbols
   maxSpeed:        0.3,    // Max pixels-per-frame velocity
   minFontSize:     11,     // Smallest symbol font size (px)
   maxFontSize:     17,     // Largest symbol font size (px)
