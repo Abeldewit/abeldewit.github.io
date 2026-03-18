@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# abeldewit.github.io
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal website built with [Nuxt 3](https://nuxt.com). Features a light theme with bold accent colors, animated particle background, scroll-reveal animations, and a typing effect in the hero section.
 
-## Available Scripts
+**Live site:** https://abeldewit.github.io
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+- **Nuxt 3** — Vue.js framework with file-based routing
+- **Pure CSS** — CSS custom properties for theming, no CSS framework
+- **Canvas 2D API** — particle/symbol background animation
+- **IntersectionObserver** — scroll-triggered reveal animations
+- **gh-pages** — static site deployment to GitHub Pages
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+├── assets/css/main.css       # Global styles & CSS variables
+├── components/
+│   ├── AppNav.vue            # Fixed navigation with scrollspy
+│   ├── AppFooter.vue         # Footer
+│   ├── ParticleCanvas.vue    # Animated canvas background
+│   ├── HeroSection.vue       # Hero with typing animation
+│   ├── ExperienceSection.vue # Timeline of work & education
+│   ├── ProjectsSection.vue   # Project cards
+│   └── ContactSection.vue    # Contact links
+├── composables/useReveal.js  # Shared scroll-reveal composable
+├── pages/
+│   ├── index.vue             # Home page
+│   └── portfolio.vue         # Photography & drone portfolio
+├── public/
+│   ├── logos/                # Company/institution logos
+│   ├── gallery/              # Portfolio photos (add your own)
+│   └── cv.pdf                # CV download
+└── nuxt.config.js
+```
 
-### `npm test`
+## Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+npm run dev       # Start dev server at localhost:3000
+npm run generate  # Build static site to .output/public/
+npm run preview   # Preview the generated site
+```
 
-### `npm run build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The site deploys automatically to GitHub Pages via GitHub Actions on every push to `main`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To deploy manually:
+```bash
+npm run deploy    # Runs nuxt generate && gh-pages -d .output/public
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Then set the Pages source to the `gh-pages` branch in **Settings → Pages**.
 
-### `npm run eject`
+## Customisation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+All colours, fonts, and spacing are defined as CSS custom properties in `assets/css/main.css` under `:root`. Changing a value there updates the whole site.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To add portfolio photos, drop images into `public/gallery/` and update the `galleryItems` array in `pages/portfolio.vue`.
