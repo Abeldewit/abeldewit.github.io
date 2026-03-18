@@ -128,7 +128,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 /* Glassmorphism: kicks in after user scrolls */
 .nav.scrolled {
-  background: rgba(247, 248, 255, 0.88);
+  background: rgba(247, 248, 255, 0.78);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
@@ -215,12 +215,12 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   max-height: 0;
   overflow: hidden;
   background: rgba(247, 248, 255, 0.97);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   transition: max-height 0.35s ease, padding 0.35s ease;
 }
 .mobile-menu.open {
   max-height: 320px;
   padding: 0.5rem 0 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 .mobile-link {
   padding: 0.8rem 2rem;
