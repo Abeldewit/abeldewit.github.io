@@ -89,23 +89,23 @@ useReveal('#projects')
 // ── Projects data ──────────────────────────────────────────────────────────
 // Add or edit entries here. `github` and `demo` can be null if not applicable.
 const projects = [
-  {
-    icon:        '🛰️',
-    title:       'Crop Classification from Satellite Imagery',
-    description: 'Deep learning pipeline for multi-label crop classification using Sentinel-2 satellite data. Benchmarked Vision Transformers (ViT) against CNN baselines with a focus on few-shot generalisation.',
-    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
-    github:      '#',
+    {
+    icon:        '🧬',
+    title:       'DNANet',
+    description: "Novel application of traditional U-Net on DNA EPG profiles for allele calling.",
+    gradient:    'linear-gradient(90deg, #8b5cf6, #ec4899)',
+    github:      null,
     demo:        null,
-    tags:        ['PyTorch', 'ViT', 'CNN', 'Satellite Imagery', 'Python'],
+    tags:        ['Machine Learning', 'DNA', 'Pytorch'],
   },
   {
-    icon:        '☀️',
-    title:       'Solar Parking Optimizer',
-    description: 'ML model predicting optimal parking orientation for solar-powered EVs. Combines live weather API data with spatial analysis to maximise solar energy capture throughout the day.',
-    gradient:    'linear-gradient(90deg, #f59e0b, #ef4444)',
-    github:      '#',
+    icon:        '🛰️',
+    title:       'Image Segmentation for Remote Sensing, Crop detection using Visual Transformers',
+    description: 'Dit artikel onderzoekt de mogelijkheid van Vision Transformers om het probleem van gewas herkenning in satellietbeelden op te lossen. Met de toenemende behoefte aan verbetering van voedselproductie kunnen remote sensing technieken boeren beter inzicht geven in hun landgebruik. Een basismodel, het huidige best presterende model en het nieuwe Segmenter-model zijn getraind en geëvalueerd met behulp van een benchmark dataset, wat inzicht geeft in hun leervermogen en de valkuilen die sommige gewassoorten voor een model kunnen vormen.',
+    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
+    github:      null,
     demo:        null,
-    tags:        ['Machine Learning', 'REST API', 'Data Engineering', 'Python'],
+    tags:        ['PyTorch', 'ViT', 'CNN', 'Satellite Imagery', 'Python'],
   },
   {
     icon:        '📄',
@@ -115,6 +115,24 @@ const projects = [
     github:      null,
     demo:        null,
     tags:        ['NLP', 'Data Visualisation', 'BI', 'Python'],
+  },
+  {
+    icon:        '👇',
+    title:       'Deep Learning Model for Artificial Skin Data Interpretation',
+    description: "In dit onderzoeksproject, met een team van 6, was het doel een end-to-end pipeline te ontwikkelen om een model te trainen in het herkennen van schadelijke aanrakingen op een siliconenhuid. De helft van het project bestond uit het creëren van een realistische simulatie van de huid waarin krachtsensoren waren ingebed. Met deze simulatie konden scenario's worden gecreëerd om trainingsgegevens en labels voor het model te genereren.",
+    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
+    github:      null,
+    demo:        null,
+    tags:        ['Finite Element Modelling', 'Simulation', 'Robotics'],
+  },
+  {
+    icon:        '♟️',
+    title:       'Automatic Visual Tutorial Generation for Board Games',
+    description: '',
+    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
+    github:      null,
+    demo:        null,
+    tags:        ['Ludii General Game System', 'Rulebook', 'Visual Explanation'],
   },
   {
     icon:        '🚁',
