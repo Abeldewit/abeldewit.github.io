@@ -1,0 +1,236 @@
+/* ============================================================
+   main.css — Global styles for abeldewit.github.io
+   This file is loaded on every page via nuxt.config.js.
+   ============================================================ */
+
+/* ── Google Fonts (fallback if <head> link fails) ─────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* ── CSS Custom Properties (variables) ────────────────────── */
+/* Change these to restyle the entire site in one place.      */
+:root {
+  /* Backgrounds — light theme */
+  --bg-primary:   #f7f8ff;  /* Soft white with a hint of lavender */
+  --bg-secondary: #eef1ff;  /* Slightly deeper for alternating sections */
+
+  /* Accent colors — deeper shades for contrast on light backgrounds */
+  --purple: #6d28d9;
+  --pink:   #db2777;
+  --blue:   #1d4ed8;
+  --cyan:   #0e7490;
+  --green:  #047857;
+
+  /* Text */
+  --text-primary:   #0f172a;  /* Near-black navy */
+  --text-secondary: #475569;  /* Medium slate */
+  --text-muted:     #94a3b8;  /* Lighter slate */
+
+  /* Named gradients */
+  --grad-purple-pink: linear-gradient(135deg, #6d28d9, #db2777);
+  --grad-blue-cyan:   linear-gradient(135deg, #1d4ed8, #0e7490);
+  --grad-green-blue:  linear-gradient(135deg, #047857, #1d4ed8);
+
+  /* Glassmorphism card — frosted white glass on light background */
+  --glass-bg:     rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.07);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+
+  /* Tag chips (used in experience + project cards) */
+  --tag-bg:     rgba(109, 40, 217, 0.07);
+  --tag-border: rgba(109, 40, 217, 0.18);
+  --tag-color:  #5b21b6;
+
+  /* Layout */
+  --max-width:      1100px;
+  --section-pad:    6rem 2rem;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+
+  /* Transition shorthand */
+  --ease: all 0.25s ease;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;  /* Smooth anchor scrolling */
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+
+/* ── Layout helpers ────────────────────────────────────────── */
+
+/* Centers content and applies horizontal padding */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Standard section spacing */
+.section {
+  padding: var(--section-pad);
+  position: relative;
+}
+
+/* ── Glassmorphism card ────────────────────────────────────── */
+/* Used for experience cards, project cards, contact cards etc */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ── Gradient text ─────────────────────────────────────────── */
+/* Apply to a <span> inside a heading for a colorful word */
+.gradient-text {
+  background: var(--grad-purple-pink);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: var(--ease);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Filled gradient button */
+.btn-primary {
+  background: var(--grad-purple-pink);
+  color: white;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+}
+
+/* Outlined / ghost button */
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1.5px solid rgba(109, 40, 217, 0.25);
+}
+.btn-outline:hover {
+  background: rgba(109, 40, 217, 0.06);
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+/* ── Section headings ──────────────────────────────────────── */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+.section-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 1.05rem;
+  max-width: 560px;
+  margin: 0 auto 4rem;
+}
+
+/* ── Scroll-reveal animations ──────────────────────────────── */
+/*
+  Elements with .reveal start invisible and slide up.
+  JavaScript (IntersectionObserver) adds .visible when
+  the element enters the viewport, triggering the CSS transition.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Keyframe animations ───────────────────────────────────── */
+
+/* Gentle up-and-down float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Responsive section padding ────────────────────────────── */
+/* Tighten section spacing on smaller screens */
+@media (max-width: 768px) {
+  :root { --section-pad: 4.5rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  :root { --section-pad: 3.5rem 1rem; }
+
+  /* Slightly smaller section headings on mobile */
+  .section-title    { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .section-subtitle { font-size: 0.95rem; margin-bottom: 2.5rem; }
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
