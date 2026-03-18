@@ -91,8 +91,8 @@
 
             <!-- Period and location row -->
             <div class="card-meta">
-              <span>📅 {{ item.period }}</span>
-              <span>📍 {{ item.location }}</span>
+              <span>{{ item.period }}</span>
+              <span>{{ item.location }}</span>
             </div>
 
             <!-- Description -->
@@ -147,9 +147,9 @@ const items = [
     period:      'Oct 2024 – Present',
     location:    'Den Haag, Netherlands',
     color:       '#6d28d9',
-    logo:        null,  // add /logos/nfi.png when you have the logo
+    logo:        '/logos/nfi.jpeg',  // add /logos/nfi.png when you have the logo
     description: 'Applying data science and machine learning techniques to forensic investigations at the Dutch national forensic institute.',
-    tags:        ['Data Science', 'Machine Learning', 'Python', 'Forensics'],
+    tags:        ['Data Science', 'Machine Learning', 'Publication', 'DNA'],
   },
   {
     type:        'Work',
@@ -158,9 +158,9 @@ const items = [
     period:      'Oct 2023 – Sep 2024',
     location:    'Amsterdam, Netherlands · Hybrid',
     color:       '#047857',
-    logo:        null,  // add /logos/abnamro.png when you have the logo
+    logo:        'logos/abnamro.jpeg',  // add /logos/abnamro.png when you have the logo
     description: "The ESG team at ABN AMRO is responsible for onboarding external sustainability data sources into the bank's main data platform. I set up data flows with control frameworks covering metadata validation, data quality monitoring, and adequate logging.",
-    tags:        ['SQL', 'Python', 'Databricks', 'Airflow', 'Azure', 'PySpark', 'CI/CD', 'Scrum'],
+    tags:        ['Databricks', 'Airflow', 'Azure', 'PySpark', 'CI/CD', 'Scrum', 'GIS Data'],
   },
   {
     type:        'Work',
@@ -169,20 +169,9 @@ const items = [
     period:      'Apr 2023 – Sep 2024',
     location:    'Driebergen-Rijsenburg, Netherlands · Hybrid',
     color:       '#1d4ed8',
-    logo:        null,  // add /logos/harvest.png when you have the logo
+    logo:        '/logos/harvest.jpeg',  // add /logos/harvest.png when you have the logo
     description: 'During the period before my first outsourcing I gained certifications in Data Engineering and led an internal recruitment portal project — building a digital platform where candidates could upload and evaluate their technical challenges. This required project management, stakeholder management, and Azure cloud experience.',
     tags:        ['Databricks', 'Azure', 'MLOps', 'Kubernetes', 'Data Modeling', 'PySpark', 'CI/CD'],
-  },
-  {
-    type:        'Work',
-    role:        'Co-Founder',
-    org:         'Weevi',
-    period:      'Jan 2021 – Jun 2024',
-    location:    'Eindhoven, Netherlands · Hybrid',
-    color:       '#db2777',
-    logo:        null,  // add /logos/weevi.png when you have the logo
-    description: 'Co-founded Weevi, a sustainability-focused start-up. Combined entrepreneurship with technical skills to build a product from the ground up — handling everything from business strategy and project planning to hands-on development.',
-    tags:        ['Entrepreneurship', 'Start-up', 'Project Planning', 'Business Strategy', 'Sustainability'],
   },
   {
     type:        'Work',
@@ -193,7 +182,7 @@ const items = [
     color:       '#0e7490',
     logo:        '/logos/lightyear.jpeg',
     description: 'Set up a data pipeline within the newly adopted Databricks platform using (Py)Spark. Additionally worked in a scrum team on the strategy and architecture for implementing Reinforcement Learning and Multi-Integer Linear Programming — creating a model to optimise energy-saving and revenue strategies while the solar car charges from the grid.',
-    tags:        ['PySpark', 'Databricks', 'Reinforcement Learning', 'Python', 'Dask', 'Scrum'],
+    tags:        ['PySpark', 'Databricks', 'Dask', 'Scrum'],
   },
   {
     type:        'Work',
@@ -204,7 +193,7 @@ const items = [
     color:       '#1d4ed8',
     logo:        '/logos/capgemini.jpeg',
     description: 'Explored models and data types for Crop Classification in satellite imagery. Deep Learning was used to implement and benchmark models, with a particular focus on evaluating Vision Transformers (ViT) against traditional CNN architectures.',
-    tags:        ['Deep Learning', 'Vision Transformers', 'CNNs', 'Computer Vision', 'Big Data', 'Python'],
+    tags:        ['Deep Learning', 'Vision Transformers', 'CNNs', 'Computer Vision', 'Satellite Imagery'],
   },
   {
     type:        'Work',
@@ -215,10 +204,10 @@ const items = [
     color:       '#0e7490',
     logo:        '/logos/lightyear.jpeg',
     description: 'Built a Business Intelligence tool that searches and analyses patents using high-level queries — removing the need for in-depth knowledge of patent classifications. Used NLP and unique per-patent embeddings; results stored in a data lake via PySpark and visualised in an intuitive competition-landscape dashboard.',
-    tags:        ['NLP', 'Text Embeddings', 'PySpark', 'Business Intelligence', 'Dashboards', 'Python'],
+    tags:        ['NLP', 'Text Embeddings', 'PySpark', 'Business Intelligence', 'Dashboards'],
   },
   {
-    type:        'Education',
+    type:        'Work',
     role:        'Teaching Assistant',
     org:         'Maastricht University',
     period:      'Oct 2020 – Dec 2021',
@@ -237,7 +226,7 @@ const items = [
     color:       '#047857',
     logo:        '/logos/maastricht.jpeg',
     description: "2-year Master's programme focused on simulating human intelligence for a wide variety of applications — from game design to patient diagnosis. Graduated with a thesis on deep learning for satellite crop classification.",
-    tags:        ['NLP', 'Computer Vision', 'Machine Learning', 'Statistical Data Analysis', 'Python'],
+    tags:        ['Data Science', 'AI', 'NLP', 'Statistical Data Analysis', 'Python'],
   },
   {
     type:        'Education',
@@ -246,7 +235,7 @@ const items = [
     period:      '2019',
     location:    'Reykjavik, Iceland',
     color:       '#0e7490',
-    logo:        null,  // add /logos/reykjavik.png when you have the logo
+    logo:        '/logos/reykjavik.jpeg',  // add /logos/reykjavik.png when you have the logo
     description: 'Exchange semester in Iceland. Courses: Cryptography, Compilers, Computer Networks, Deep Learning.',
     tags:        ['Cryptography', 'Compilers', 'Computer Networks', 'Deep Learning'],
   },
@@ -259,7 +248,7 @@ const items = [
     color:       '#047857',
     logo:        '/logos/maastricht.jpeg',
     description: "3-year Bachelor's programme offering a unique combination of artificial intelligence, computer science and mathematics.",
-    tags:        ['Data Science', 'AI', 'Mathematics', 'Software Engineering', 'Python'],
+    tags:        ['Data Structures', 'Mathematics', 'Software Engineering', 'Python', 'Java'],
   },
 ]
 
