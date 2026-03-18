@@ -27,7 +27,7 @@
 
       <!-- Main name — the blinking _ is a retro cursor touch -->
       <h1 class="hero-name reveal">
-        Abel de Wit<span class="cursor">_</span>
+        Abel<span class="cursor">_</span>
       </h1>
 
       <!-- Typing animation: cycles through different roles -->
@@ -124,11 +124,13 @@ import { useReveal } from '~/composables/useReveal'
 // Cycles through `roles` by typing and erasing each string character by character
 const roles = [
   'Forensic Data Scientist',
-  'Data Engineer',
-  'ML Engineer',
-  'Co-Founder',
-  'Drone Pilot',
+  'Dreamer',
   'Photographer',
+  'Founder',
+  'Data Engineer',
+  'Tinkerer',
+  'Drone Pilot',
+  'Problem Solver'
 ]
 
 const displayedRole = ref('')  // Text currently shown on screen
@@ -243,7 +245,7 @@ onUnmounted(() => clearTimeout(timer))
 /* "Hello, I'm" label */
 .hero-greeting {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
