@@ -1,0 +1,282 @@
+/* ============================================================
+   main.css — Global styles for abeldewit.github.io
+   This file is loaded on every page via nuxt.config.js.
+   ============================================================ */
+
+/* ── Google Fonts (fallback if <head> link fails) ─────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* ── CSS Custom Properties (variables) ────────────────────── */
+/* Change these to restyle the entire site in one place.      */
+:root {
+  /* Backgrounds — warm light theme */
+  --bg-primary:   #fffbf7;  /* Soft warm white */
+  --bg-secondary: #fff3e8;  /* Warm cream for alternating sections */
+
+  /* Accent colors — orange-oriented palette */
+  --orange: #c2410c;  /* Deep burnt orange — primary accent */
+  --amber:  #b45309;  /* Warm amber — secondary accent */
+  --red:    #dc2626;  /* Warm red — tertiary accent */
+  --gold:   #ca8a04;  /* Golden yellow */
+  --teal:   #0f766e;  /* Cool teal for contrast */
+
+  /* Text */
+  --text-primary:   #1c0a00;  /* Near-black warm brown */
+  --text-secondary: #57534e;  /* Warm stone grey */
+  --text-muted:     #a8a29e;  /* Light stone */
+
+  /* Named gradients */
+  --grad-orange-amber: linear-gradient(135deg, #c2410c, #b45309);
+  --grad-red-gold:     linear-gradient(135deg, #dc2626, #ca8a04);
+  --grad-teal-red:     linear-gradient(135deg, #0f766e, #dc2626);
+
+  /* Glassmorphism card — frosted warm glass on light background */
+  --glass-bg:     rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(0, 0, 0, 0.07);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+
+  /* Tag chips (used in experience + project cards) */
+  --tag-bg:     rgba(194, 65, 12, 0.07);
+  --tag-border: rgba(194, 65, 12, 0.18);
+  --tag-color:  #9a3412;  /* orange-800 */
+
+  /* Navigation backgrounds (replaced in dark mode below) */
+  --nav-scrolled-bg: rgba(255, 251, 247, 0.88);
+  --nav-mobile-bg:   rgba(255, 251, 247, 0.97);
+
+  /* Layout */
+  --max-width:      1100px;
+  --section-pad:    6rem 2rem;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+
+  /* Transition shorthand */
+  --ease: all 0.25s ease;
+}
+
+/* ── Dark theme ────────────────────────────────────────────── */
+/*
+  Applied when the user has selected dark mode (data-theme="dark"
+  on <html>) OR when their OS preference is dark and they haven't
+  made an explicit choice yet (data-theme="auto" / no attribute).
+  The anti-flash script in nuxt.config.js sets data-theme before
+  the page renders so there's no white flash.
+*/
+[data-theme="dark"] {
+  /* Backgrounds — very dark warm brown */
+  --bg-primary:   #160800;
+  --bg-secondary: #1e0d02;
+
+  /* Accent colors — slightly brighter for legibility on dark */
+  --orange: #ea580c;
+  --amber:  #d97706;
+  --red:    #ef4444;
+  --gold:   #eab308;
+  --teal:   #14b8a6;
+
+  /* Text */
+  --text-primary:   #fef3e8;  /* Warm off-white */
+  --text-secondary: #c9a98a;  /* Warm tan */
+  --text-muted:     #7c6450;  /* Muted warm brown */
+
+  /* Glassmorphism card — dark frosted glass */
+  --glass-bg:     rgba(30, 13, 2, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 4px 28px rgba(0, 0, 0, 0.4);
+
+  /* Tag chips — more visible on dark backgrounds */
+  --tag-bg:     rgba(234, 88, 12, 0.18);
+  --tag-border: rgba(234, 88, 12, 0.35);
+  --tag-color:  #fb923c;  /* orange-400, bright enough for dark bg */
+
+  /* Navigation backgrounds */
+  --nav-scrolled-bg: rgba(22, 8, 0, 0.92);
+  --nav-mobile-bg:   rgba(22, 8, 0, 0.98);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;  /* Smooth anchor scrolling */
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* Smooth transition when switching themes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+
+/* ── Layout helpers ────────────────────────────────────────── */
+
+/* Centers content and applies horizontal padding */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Standard section spacing */
+.section {
+  padding: var(--section-pad);
+  position: relative;
+}
+
+/* ── Glassmorphism card ────────────────────────────────────── */
+/* Used for experience cards, project cards, contact cards etc */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ── Gradient text ─────────────────────────────────────────── */
+/* Apply to a <span> inside a heading for a colorful word */
+.gradient-text {
+  background: var(--grad-orange-amber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: var(--ease);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Filled gradient button */
+.btn-primary {
+  background: var(--grad-orange-amber);
+  color: white;
+  box-shadow: 0 4px 20px rgba(194, 65, 12, 0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(194, 65, 12, 0.6);
+}
+
+/* Outlined / ghost button */
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1.5px solid rgba(194, 65, 12, 0.25);
+}
+.btn-outline:hover {
+  background: rgba(194, 65, 12, 0.06);
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+/* ── Section headings ──────────────────────────────────────── */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+.section-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 1.05rem;
+  max-width: 560px;
+  margin: 0 auto 4rem;
+}
+
+/* ── Scroll-reveal animations ──────────────────────────────── */
+/*
+  Elements with .reveal start invisible and slide up.
+  JavaScript (IntersectionObserver) adds .visible when
+  the element enters the viewport, triggering the CSS transition.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Keyframe animations ───────────────────────────────────── */
+
+/* Gentle up-and-down float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Responsive section padding ────────────────────────────── */
+/* Tighten section spacing on smaller screens */
+@media (max-width: 768px) {
+  :root { --section-pad: 4.5rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  :root { --section-pad: 3.5rem 1rem; }
+
+  /* Slightly smaller section headings on mobile */
+  .section-title    { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .section-subtitle { font-size: 0.95rem; margin-bottom: 2.5rem; }
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
