@@ -146,7 +146,7 @@ const items = [
     org:         'Nederlands Forensisch Instituut',
     period:      'Oct 2024 – Present',
     location:    'Den Haag, Netherlands',
-    color:       '#6d28d9',
+    color:       '#c2410c',  // orange
     logo:        '/logos/nfi.jpeg',  // add /logos/nfi.png when you have the logo
     description: 'Applying data science and machine learning techniques to forensic investigations at the Dutch national forensic institute.',
     tags:        ['Data Science', 'Machine Learning', 'Publication', 'DNA'],
@@ -157,7 +157,7 @@ const items = [
     org:         'ABN AMRO Bank N.V.',
     period:      'Oct 2023 – Sep 2024',
     location:    'Amsterdam, Netherlands · Hybrid',
-    color:       '#047857',
+    color:       '#0f766e',  // teal
     logo:        'logos/abnamro.jpeg',  // add /logos/abnamro.png when you have the logo
     description: "The ESG team at ABN AMRO is responsible for onboarding external sustainability data sources into the bank's main data platform. I set up data flows with control frameworks covering metadata validation, data quality monitoring, and adequate logging.",
     tags:        ['Databricks', 'Airflow', 'Azure', 'PySpark', 'CI/CD', 'Scrum', 'GIS Data'],
@@ -168,7 +168,7 @@ const items = [
     org:         'Harvest',
     period:      'Apr 2023 – Sep 2024',
     location:    'Driebergen-Rijsenburg, Netherlands · Hybrid',
-    color:       '#1d4ed8',
+    color:       '#dc2626',  // red
     logo:        '/logos/harvest.jpeg',  // add /logos/harvest.png when you have the logo
     description: 'During the period before my first outsourcing I gained certifications in Data Engineering and led an internal recruitment portal project — building a digital platform where candidates could upload and evaluate their technical challenges. This required project management, stakeholder management, and Azure cloud experience.',
     tags:        ['Databricks', 'Azure', 'MLOps', 'Kubernetes', 'Data Modeling', 'PySpark', 'CI/CD'],
@@ -179,7 +179,7 @@ const items = [
     org:         'Lightyear',
     period:      'Aug 2022 – Feb 2023',
     location:    'Helmond, Netherlands',
-    color:       '#0e7490',
+    color:       '#b45309',  // amber
     logo:        '/logos/lightyear.jpeg',
     description: 'Set up a data pipeline within the newly adopted Databricks platform using (Py)Spark. Additionally worked in a scrum team on the strategy and architecture for implementing Reinforcement Learning and Multi-Integer Linear Programming — creating a model to optimise energy-saving and revenue strategies while the solar car charges from the grid.',
     tags:        ['PySpark', 'Databricks', 'Dask', 'Scrum'],
@@ -190,7 +190,7 @@ const items = [
     org:         'Capgemini',
     period:      'Feb 2022 – Aug 2022',
     location:    'Utrecht, Netherlands',
-    color:       '#1d4ed8',
+    color:       '#ca8a04',  // gold
     logo:        '/logos/capgemini.jpeg',
     description: 'Explored models and data types for Crop Classification in satellite imagery. Deep Learning was used to implement and benchmark models, with a particular focus on evaluating Vision Transformers (ViT) against traditional CNN architectures.',
     tags:        ['Deep Learning', 'Vision Transformers', 'CNNs', 'Computer Vision', 'Satellite Imagery'],
@@ -201,7 +201,7 @@ const items = [
     org:         'Lightyear',
     period:      'Sep 2021 – Feb 2022',
     location:    'Helmond, Netherlands',
-    color:       '#0e7490',
+    color:       '#b45309',  // amber
     logo:        '/logos/lightyear.jpeg',
     description: 'Built a Business Intelligence tool that searches and analyses patents using high-level queries — removing the need for in-depth knowledge of patent classifications. Used NLP and unique per-patent embeddings; results stored in a data lake via PySpark and visualised in an intuitive competition-landscape dashboard.',
     tags:        ['NLP', 'Text Embeddings', 'PySpark', 'Business Intelligence', 'Dashboards'],
@@ -212,7 +212,7 @@ const items = [
     org:         'Maastricht University',
     period:      'Oct 2020 – Dec 2021',
     location:    'Maastricht, Netherlands',
-    color:       '#047857',
+    color:       '#0f766e',  // teal
     logo:        '/logos/maastricht.jpeg',
     description: 'Led hands-on tutorials on campus and online. Graded assignments and provided feedback. Courses: Introduction to Computer Science (Java & Python), Calculus, Data Structures & Algorithms, Software Engineering.',
     tags:        ['Teaching', 'Java', 'Python', 'Algorithms', 'Mentoring'],
@@ -223,7 +223,7 @@ const items = [
     org:         'Maastricht University',
     period:      '2020 – 2022',
     location:    'Maastricht, Netherlands',
-    color:       '#047857',
+    color:       '#c2410c',  // orange
     logo:        '/logos/maastricht.jpeg',
     description: "2-year Master's programme focused on simulating human intelligence for a wide variety of applications — from game design to patient diagnosis. Graduated with a thesis on deep learning for satellite crop classification.",
     tags:        ['Data Science', 'AI', 'NLP', 'Statistical Data Analysis', 'Python'],
@@ -234,7 +234,7 @@ const items = [
     org:         'Reykjavik University',
     period:      '2019',
     location:    'Reykjavik, Iceland',
-    color:       '#0e7490',
+    color:       '#ca8a04',  // gold
     logo:        '/logos/reykjavik.jpeg',  // add /logos/reykjavik.png when you have the logo
     description: 'Exchange semester in Iceland. Courses: Cryptography, Compilers, Computer Networks, Deep Learning.',
     tags:        ['Cryptography', 'Compilers', 'Computer Networks', 'Deep Learning'],
@@ -245,7 +245,7 @@ const items = [
     org:         'Maastricht University',
     period:      '2016 – 2020',
     location:    'Maastricht, Netherlands',
-    color:       '#047857',
+    color:       '#0f766e',  // teal
     logo:        '/logos/maastricht.jpeg',
     description: "3-year Bachelor's programme offering a unique combination of artificial intelligence, computer science and mathematics.",
     tags:        ['Data Structures', 'Mathematics', 'Software Engineering', 'Python', 'Java'],
@@ -257,10 +257,10 @@ const items = [
 // Add/remove entries to keep this list current.
 const certs = [
   { name: 'AI Agents Fundamentals',               issuer: 'Hugging Face',      year: 'Mar 2025', color: '#f59e0b' },
-  { name: 'Professional Scrum Master™ I (PSM I)', issuer: 'Scrum.org',         year: 'Jan 2024', color: '#6d28d9' },
+  { name: 'Professional Scrum Master™ I (PSM I)', issuer: 'Scrum.org',         year: 'Jan 2024', color: '#c2410c' },
   { name: 'Azure Fundamentals (AZ-900)',           issuer: 'Microsoft',         year: 'Apr 2023', color: '#0078d4' },
   { name: 'Databricks Lakehouse Fundamentals',    issuer: 'Databricks',        year: 'Apr 2023', color: '#e87722' },
-  { name: 'Data Intelligence Track',              issuer: 'Capgemini Academy', year: 'Feb 2022', color: '#1d4ed8' },
+  { name: 'Data Intelligence Track',              issuer: 'Capgemini Academy', year: 'Feb 2022', color: '#dc2626' },
 ]
 </script>
 
@@ -286,13 +286,13 @@ const certs = [
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--orange);
   margin-bottom: 0.4rem;
 }
 
-/* Blue-to-cyan gradient on the heading accent word */
+/* Orange-to-amber gradient on the heading accent word */
 .accent-blue {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  background: linear-gradient(135deg, var(--orange), var(--amber));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -313,9 +313,9 @@ const certs = [
   background: linear-gradient(
     to bottom,
     transparent,
-    var(--purple) 10%,
-    var(--blue)   50%,
-    var(--green)  90%,
+    var(--orange) 10%,
+    var(--red)    50%,
+    var(--teal)   90%,
     transparent
   );
 }

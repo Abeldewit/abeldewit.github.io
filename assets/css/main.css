@@ -9,36 +9,40 @@
 /* ── CSS Custom Properties (variables) ────────────────────── */
 /* Change these to restyle the entire site in one place.      */
 :root {
-  /* Backgrounds — light theme */
-  --bg-primary:   #f7f8ff;  /* Soft white with a hint of lavender */
-  --bg-secondary: #eef1ff;  /* Slightly deeper for alternating sections */
+  /* Backgrounds — warm light theme */
+  --bg-primary:   #fffbf7;  /* Soft warm white */
+  --bg-secondary: #fff3e8;  /* Warm cream for alternating sections */
 
-  /* Accent colors — deeper shades for contrast on light backgrounds */
-  --purple: #6d28d9;
-  --pink:   #db2777;
-  --blue:   #1d4ed8;
-  --cyan:   #0e7490;
-  --green:  #047857;
+  /* Accent colors — orange-oriented palette */
+  --orange: #c2410c;  /* Deep burnt orange — primary accent */
+  --amber:  #b45309;  /* Warm amber — secondary accent */
+  --red:    #dc2626;  /* Warm red — tertiary accent */
+  --gold:   #ca8a04;  /* Golden yellow */
+  --teal:   #0f766e;  /* Cool teal for contrast */
 
   /* Text */
-  --text-primary:   #0f172a;  /* Near-black navy */
-  --text-secondary: #475569;  /* Medium slate */
-  --text-muted:     #94a3b8;  /* Lighter slate */
+  --text-primary:   #1c0a00;  /* Near-black warm brown */
+  --text-secondary: #57534e;  /* Warm stone grey */
+  --text-muted:     #a8a29e;  /* Light stone */
 
   /* Named gradients */
-  --grad-purple-pink: linear-gradient(135deg, #6d28d9, #db2777);
-  --grad-blue-cyan:   linear-gradient(135deg, #1d4ed8, #0e7490);
-  --grad-green-blue:  linear-gradient(135deg, #047857, #1d4ed8);
+  --grad-orange-amber: linear-gradient(135deg, #c2410c, #b45309);
+  --grad-red-gold:     linear-gradient(135deg, #dc2626, #ca8a04);
+  --grad-teal-red:     linear-gradient(135deg, #0f766e, #dc2626);
 
-  /* Glassmorphism card — frosted white glass on light background */
-  --glass-bg:     rgba(255, 255, 255, 0.75);
+  /* Glassmorphism card — frosted warm glass on light background */
+  --glass-bg:     rgba(255, 255, 255, 0.78);
   --glass-border: rgba(0, 0, 0, 0.07);
   --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 
   /* Tag chips (used in experience + project cards) */
-  --tag-bg:     rgba(109, 40, 217, 0.07);
-  --tag-border: rgba(109, 40, 217, 0.18);
-  --tag-color:  #5b21b6;
+  --tag-bg:     rgba(194, 65, 12, 0.07);
+  --tag-border: rgba(194, 65, 12, 0.18);
+  --tag-color:  #9a3412;  /* orange-800 */
+
+  /* Navigation backgrounds (replaced in dark mode below) */
+  --nav-scrolled-bg: rgba(255, 251, 247, 0.88);
+  --nav-mobile-bg:   rgba(255, 251, 247, 0.97);
 
   /* Layout */
   --max-width:      1100px;
@@ -50,6 +54,46 @@
 
   /* Transition shorthand */
   --ease: all 0.25s ease;
+}
+
+/* ── Dark theme ────────────────────────────────────────────── */
+/*
+  Applied when the user has selected dark mode (data-theme="dark"
+  on <html>) OR when their OS preference is dark and they haven't
+  made an explicit choice yet (data-theme="auto" / no attribute).
+  The anti-flash script in nuxt.config.js sets data-theme before
+  the page renders so there's no white flash.
+*/
+[data-theme="dark"] {
+  /* Backgrounds — very dark warm brown */
+  --bg-primary:   #160800;
+  --bg-secondary: #1e0d02;
+
+  /* Accent colors — slightly brighter for legibility on dark */
+  --orange: #ea580c;
+  --amber:  #d97706;
+  --red:    #ef4444;
+  --gold:   #eab308;
+  --teal:   #14b8a6;
+
+  /* Text */
+  --text-primary:   #fef3e8;  /* Warm off-white */
+  --text-secondary: #c9a98a;  /* Warm tan */
+  --text-muted:     #7c6450;  /* Muted warm brown */
+
+  /* Glassmorphism card — dark frosted glass */
+  --glass-bg:     rgba(30, 13, 2, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 4px 28px rgba(0, 0, 0, 0.4);
+
+  /* Tag chips — more visible on dark backgrounds */
+  --tag-bg:     rgba(234, 88, 12, 0.18);
+  --tag-border: rgba(234, 88, 12, 0.35);
+  --tag-color:  #fb923c;  /* orange-400, bright enough for dark bg */
+
+  /* Navigation backgrounds */
+  --nav-scrolled-bg: rgba(22, 8, 0, 0.92);
+  --nav-mobile-bg:   rgba(22, 8, 0, 0.98);
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -70,6 +114,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* Smooth transition when switching themes */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 img { max-width: 100%; display: block; }
@@ -104,7 +150,7 @@ a   { color: inherit; text-decoration: none; }
 /* ── Gradient text ─────────────────────────────────────────── */
 /* Apply to a <span> inside a heading for a colorful word */
 .gradient-text {
-  background: var(--grad-purple-pink);
+  background: var(--grad-orange-amber);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -129,24 +175,24 @@ a   { color: inherit; text-decoration: none; }
 
 /* Filled gradient button */
 .btn-primary {
-  background: var(--grad-purple-pink);
+  background: var(--grad-orange-amber);
   color: white;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 4px 20px rgba(194, 65, 12, 0.4);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+  box-shadow: 0 8px 30px rgba(194, 65, 12, 0.6);
 }
 
 /* Outlined / ghost button */
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1.5px solid rgba(109, 40, 217, 0.25);
+  border: 1.5px solid rgba(194, 65, 12, 0.25);
 }
 .btn-outline:hover {
-  background: rgba(109, 40, 217, 0.06);
-  border-color: var(--purple);
+  background: rgba(194, 65, 12, 0.06);
+  border-color: var(--orange);
   transform: translateY(-2px);
 }
 
@@ -233,4 +279,4 @@ a   { color: inherit; text-decoration: none; }
 /* ── Custom scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }

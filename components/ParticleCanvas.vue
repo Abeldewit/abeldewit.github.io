@@ -56,13 +56,13 @@ const CFG = {
   connectDist:     120,    // Draw a line between symbols closer than this
   mouseRepelDist:  130,    // Radius of mouse repulsion effect
   mouseRepelForce: 1.6,    // Repulsion strength
-  // Colours — vivid but semi-transparent so they sit lightly on the white bg
+  // Colours — vivid but semi-transparent so they sit lightly on the warm white bg
   colors: [
-    'rgba(109,  40, 217, 0.55)',   // purple  (#6d28d9)
-    'rgba(219,  39, 119, 0.50)',   // pink    (#db2777)
-    'rgba( 29,  78, 216, 0.50)',   // blue    (#1d4ed8)
-    'rgba( 14, 116, 144, 0.50)',   // cyan    (#0e7490)
-    'rgba(  4, 120,  87, 0.45)',   // green   (#047857)
+    'rgba(194,  65,  12, 0.55)',   // orange  (#c2410c)
+    'rgba(180,  83,   9, 0.50)',   // amber   (#b45309)
+    'rgba(220,  38,  38, 0.50)',   // red     (#dc2626)
+    'rgba(202, 138,   4, 0.50)',   // gold    (#ca8a04)
+    'rgba( 15, 118, 110, 0.45)',   // teal    (#0f766e)
   ],
 }
 
@@ -146,7 +146,7 @@ function loop() {
         ctx.beginPath()
         ctx.moveTo(a.x, a.y)
         ctx.lineTo(b.x, b.y)
-        ctx.strokeStyle = `rgba(109, 40, 217, ${alpha})`
+        ctx.strokeStyle = `rgba(194, 65, 12, ${alpha})`
         ctx.lineWidth   = 0.7
         ctx.stroke()
       }

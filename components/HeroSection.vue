@@ -216,19 +216,19 @@ onUnmounted(() => clearTimeout(timer))
 }
 .blob-purple {
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(109, 40, 217, 0.18) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(194, 65, 12, 0.18) 0%, transparent 65%);
   top: -140px; left: -140px;
   animation-delay: 0s;
 }
 .blob-pink {
   width: 420px; height: 420px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.14) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(180, 83, 9, 0.14) 0%, transparent 65%);
   top: 30%; right: -80px;
   animation-delay: -3.5s;
 }
 .blob-cyan {
   width: 340px; height: 340px;
-  background: radial-gradient(circle, rgba(14, 116, 144, 0.13) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(202, 138, 4, 0.13) 0%, transparent 65%);
   bottom: 8%; left: 25%;
   animation-delay: -6s;
 }
@@ -263,7 +263,7 @@ onUnmounted(() => clearTimeout(timer))
 
 /* Blinking retro cursor after the name */
 .cursor {
-  color: var(--purple);
+  color: var(--orange);
   animation: blink 1.2s ease-in-out infinite;
 }
 
@@ -278,7 +278,7 @@ onUnmounted(() => clearTimeout(timer))
 .role-typed    { min-width: 1ch; }
 .type-cursor   {
   display: inline-block;
-  color: var(--pink);
+  color: var(--amber);
   animation: blink 0.7s ease-in-out infinite;
   font-weight: 300;
   margin-left: 1px;
@@ -311,19 +311,19 @@ onUnmounted(() => clearTimeout(timer))
 .social-btn {
   width: 44px; height: 44px;
   border-radius: 50%;
-  background: rgba(109, 40, 217, 0.07);
-  border: 1.5px solid rgba(109, 40, 217, 0.2);
+  background: rgba(194, 65, 12, 0.07);
+  border: 1.5px solid rgba(194, 65, 12, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--purple);
+  color: var(--orange);
   transition: var(--ease);
 }
 .social-btn:hover {
-  background: rgba(109, 40, 217, 0.14);
-  border-color: var(--purple);
+  background: rgba(194, 65, 12, 0.14);
+  border-color: var(--orange);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(109, 40, 217, 0.2);
+  box-shadow: 0 8px 20px rgba(194, 65, 12, 0.2);
 }
 
 /* ── Scroll hint ──
@@ -337,7 +337,7 @@ onUnmounted(() => clearTimeout(timer))
 }
 .scroll-mouse {
   width: 24px; height: 38px;
-  border: 2px solid rgba(109, 40, 217, 0.25);
+  border: 2px solid rgba(194, 65, 12, 0.25);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -345,7 +345,7 @@ onUnmounted(() => clearTimeout(timer))
 }
 .scroll-dot {
   width: 4px; height: 8px;
-  background: var(--purple);
+  background: var(--orange);
   border-radius: 2px;
   animation: scrollBounce 1.6s ease-in-out infinite;
 }
