@@ -35,7 +35,7 @@
       </ul>
 
       <!-- CV download button (desktop) -->
-      <a href="/cv.pdf" download class="btn btn-primary nav-cta">
+      <a href="/Resume - Abel.pdf" download class="btn btn-primary nav-cta">
         Download CV
       </a>
 
@@ -84,7 +84,7 @@
       <NuxtLink to="/portfolio" class="mobile-link" @click="menuOpen = false">
         Portfolio
       </NuxtLink>
-      <a href="/cv.pdf" download class="mobile-link">Download CV</a>
+      <a href="/Resume - Abel.pdf" download class="mobile-link">Download CV</a>
     </div>
   </nav>
 </template>
