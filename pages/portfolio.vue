@@ -150,7 +150,7 @@ const items = [
     category:    'Photography',
     icon:        '🌆',
     size:        'tall',
-    gradient:    'linear-gradient(135deg, #1e1b4b, #7c3aed)',
+    gradient:    'linear-gradient(135deg, #7c2d12, #c2410c)',
     description: 'Long-exposure cityscape. 25s at f/8, ISO 100.',
   },
   {
@@ -251,14 +251,12 @@ useReveal('.gallery-grid')
 }
 .blob-1 {
   width: 400px; height: 400px;
-  /* Updated to match the site's light-theme pink: #db2777 */
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(194, 65, 12, 0.16) 0%, transparent 70%);
   top: -80px; right: 0;
 }
 .blob-2 {
   width: 300px; height: 300px;
-  /* Updated to match the site's light-theme cyan: #0e7490 */
-  background: radial-gradient(circle, rgba(14, 116, 144, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(202, 138, 4, 0.14) 0%, transparent 70%);
   bottom: 0; left: 10%;
 }
 
@@ -299,10 +297,9 @@ useReveal('.gallery-grid')
 }
 .filter-btn.active,
 .filter-btn:hover {
-  /* Light-theme active: purple tint background, purple text */
-  background: rgba(109, 40, 217, 0.1);
-  border-color: var(--purple);
-  color: var(--purple);
+  background: rgba(194, 65, 12, 0.1);
+  border-color: var(--orange);
+  color: var(--orange);
 }
 
 /* ── Gallery ── */
@@ -350,7 +347,7 @@ useReveal('.gallery-grid')
 
 .overlay-category {
   font-size: 0.7rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 2px; color: #c4b5fd;
+  text-transform: uppercase; letter-spacing: 2px; color: var(--amber);
 }
 .overlay-title {
   font-size: 0.9rem; font-weight: 600;
@@ -404,7 +401,7 @@ useReveal('.gallery-grid')
 .lightbox-cat {
   font-size: 0.72rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: 2px;
-  color: var(--purple); display: block; margin-bottom: 0.5rem;
+  color: var(--orange); display: block; margin-bottom: 0.5rem;
 }
 .lightbox-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
 .lightbox-desc  { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; }

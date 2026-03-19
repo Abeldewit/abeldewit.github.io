@@ -93,7 +93,7 @@ const projects = [
     icon:        '🧬',
     title:       'DNANet',
     description: "Novel application of traditional U-Net on DNA EPG profiles for allele calling.",
-    gradient:    'linear-gradient(90deg, #8b5cf6, #ec4899)',
+    gradient:    'linear-gradient(90deg, #c2410c, #b45309)',
     github:      null,
     demo:        null,
     tags:        ['Machine Learning', 'DNA', 'Pytorch'],
@@ -102,7 +102,7 @@ const projects = [
     icon:        '🛰️',
     title:       'Image Segmentation for Remote Sensing, Crop detection using Visual Transformers',
     description: 'Dit artikel onderzoekt de mogelijkheid van Vision Transformers om het probleem van gewas herkenning in satellietbeelden op te lossen. Met de toenemende behoefte aan verbetering van voedselproductie kunnen remote sensing technieken boeren beter inzicht geven in hun landgebruik. Een basismodel, het huidige best presterende model en het nieuwe Segmenter-model zijn getraind en geëvalueerd met behulp van een benchmark dataset, wat inzicht geeft in hun leervermogen en de valkuilen die sommige gewassoorten voor een model kunnen vormen.',
-    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
+    gradient:    'linear-gradient(90deg, #dc2626, #ca8a04)',
     github:      null,
     demo:        null,
     tags:        ['PyTorch', 'ViT', 'CNN', 'Satellite Imagery', 'Python'],
@@ -111,7 +111,7 @@ const projects = [
     icon:        '📄',
     title:       'Patent Intelligence Dashboard',
     description: "Business intelligence tool that automates patent search, semantic clustering, and competitive landscape analysis. Built for Lightyear's internal innovation team.",
-    gradient:    'linear-gradient(90deg, #8b5cf6, #ec4899)',
+    gradient:    'linear-gradient(90deg, #c2410c, #b45309)',
     github:      null,
     demo:        null,
     tags:        ['NLP', 'Data Visualisation', 'BI', 'Python'],
@@ -120,7 +120,7 @@ const projects = [
     icon:        '👇',
     title:       'Deep Learning Model for Artificial Skin Data Interpretation',
     description: "In dit onderzoeksproject, met een team van 6, was het doel een end-to-end pipeline te ontwikkelen om een model te trainen in het herkennen van schadelijke aanrakingen op een siliconenhuid. De helft van het project bestond uit het creëren van een realistische simulatie van de huid waarin krachtsensoren waren ingebed. Met deze simulatie konden scenario's worden gecreëerd om trainingsgegevens en labels voor het model te genereren.",
-    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
+    gradient:    'linear-gradient(90deg, #dc2626, #ca8a04)',
     github:      null,
     demo:        null,
     tags:        ['Finite Element Modelling', 'Simulation', 'Robotics'],
@@ -129,7 +129,7 @@ const projects = [
     icon:        '♟️',
     title:       'Automatic Visual Tutorial Generation for Board Games',
     description: '',
-    gradient:    'linear-gradient(90deg, #3b82f6, #06b6d4)',
+    gradient:    'linear-gradient(90deg, #b45309, #ca8a04)',
     github:      null,
     demo:        null,
     tags:        ['Ludii General Game System', 'Rulebook', 'Visual Explanation'],
@@ -138,7 +138,7 @@ const projects = [
     icon:        '🚁',
     title:       'Drone Aerial Projects',
     description: 'Personal aerial photography and videography projects. Check the Portfolio page for footage and shots from various locations around the Netherlands.',
-    gradient:    'linear-gradient(90deg, #10b981, #06b6d4)',
+    gradient:    'linear-gradient(90deg, #0f766e, #ca8a04)',
     github:      null,
     demo:        '/portfolio',
     tags:        ['DJI', 'Aerial Photography', 'Video Editing', 'Creative'],
@@ -152,12 +152,12 @@ const projects = [
   overflow: hidden;
 }
 
-/* Green glow in the bottom-left */
+/* Orange glow in the bottom-left */
 .section-glow {
   position: absolute;
   bottom: -80px; left: -180px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(4, 120, 87, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(194, 65, 12, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -167,13 +167,13 @@ const projects = [
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--green);
+  color: var(--orange);
   margin-bottom: 0.4rem;
 }
 
-/* Green-blue gradient on heading accent */
+/* Orange-amber gradient on heading accent */
 .accent-green {
-  background: linear-gradient(135deg, var(--green), var(--blue));
+  background: linear-gradient(135deg, var(--orange), var(--amber));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -221,18 +221,18 @@ const projects = [
 .icon-link {
   width: 32px; height: 32px;
   border-radius: 8px;
-  background: rgba(109, 40, 217, 0.06);
-  border: 1px solid rgba(109, 40, 217, 0.15);
+  background: rgba(194, 65, 12, 0.06);
+  border: 1px solid rgba(194, 65, 12, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--purple);
+  color: var(--orange);
   transition: var(--ease);
 }
 .icon-link:hover {
   color: white;
-  background: var(--purple);
-  border-color: var(--purple);
+  background: var(--orange);
+  border-color: var(--orange);
 }
 
 .card-title {

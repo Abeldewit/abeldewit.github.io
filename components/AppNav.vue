@@ -39,6 +39,26 @@
         Download CV
       </a>
 
+      <!-- Light / dark toggle -->
+      <button class="theme-toggle" @click="toggleTheme" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+        <!-- Sun icon — shown in dark mode to switch back to light -->
+        <svg v-if="isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1"  x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22"  y1="4.22"  x2="5.64"  y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1"  y1="12" x2="3"  y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22"  y1="19.78" x2="5.64"  y2="18.36"/>
+          <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Moon icon — shown in light mode to switch to dark -->
+        <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
       <!-- Hamburger toggle (mobile only) -->
       <button
         class="hamburger"
@@ -71,6 +91,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useTheme } from '~/composables/useTheme'
 
 // ── Navigation link definitions ──────────────────────────────────────────────
 // anchor: the href to scroll to   |   section: the element id to watch
@@ -80,6 +101,9 @@ const navLinks = [
   { label: 'Projects',   anchor: '#projects',   section: 'projects'   },
   { label: 'Contact',    anchor: '#contact',    section: 'contact'    },
 ]
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+const { isDark, toggle: toggleTheme } = useTheme()
 
 // ── Reactive state ────────────────────────────────────────────────────────────
 const isScrolled     = ref(false)    // true when page has been scrolled
@@ -128,7 +152,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 /* Glassmorphism: kicks in after user scrolls */
 .nav.scrolled {
-  background: rgba(247, 248, 255, 0.78);
+  background: var(--nav-scrolled-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
@@ -152,7 +176,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   letter-spacing: -0.5px;
   flex-shrink: 0;
 }
-.nav-dot { color: var(--purple); }
+.nav-dot { color: var(--orange); }
 
 /* ── Desktop links ── */
 .nav-links {
@@ -172,16 +196,36 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 .nav-link:hover,
 .nav-link.active {
-  color: var(--purple);
-  background: rgba(109, 40, 217, 0.08);
+  color: var(--orange);
+  background: rgba(194, 65, 12, 0.08);
 }
-.nav-link.active { color: var(--purple); font-weight: 600; }
+.nav-link.active { color: var(--orange); font-weight: 600; }
 
 /* ── CTA button ── */
 .nav-cta {
   flex-shrink: 0;
   padding: 0.5rem 1.2rem;
   font-size: 0.85rem;
+}
+
+/* ── Theme toggle ── */
+.theme-toggle {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(194, 65, 12, 0.25);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--ease);
+}
+.theme-toggle:hover {
+  background: rgba(194, 65, 12, 0.08);
+  color: var(--orange);
+  border-color: var(--orange);
 }
 
 /* ── Hamburger ── */
@@ -198,7 +242,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .hamburger span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--purple);
+  background: var(--orange);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform-origin: center;
@@ -214,7 +258,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   flex-direction: column;
   max-height: 0;
   overflow: hidden;
-  background: rgba(247, 248, 255, 0.97);
+  background: var(--nav-mobile-bg);
   transition: max-height 0.35s ease, padding 0.35s ease;
 }
 .mobile-menu.open {
@@ -228,7 +272,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   font-size: 1rem;
   transition: color 0.2s;
 }
-.mobile-link:hover { color: var(--purple); }
+.mobile-link:hover { color: var(--orange); }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
