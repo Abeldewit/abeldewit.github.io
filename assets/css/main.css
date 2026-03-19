@@ -40,6 +40,10 @@
   --tag-border: rgba(194, 65, 12, 0.18);
   --tag-color:  #9a3412;  /* orange-800 */
 
+  /* Navigation backgrounds (replaced in dark mode below) */
+  --nav-scrolled-bg: rgba(255, 251, 247, 0.88);
+  --nav-mobile-bg:   rgba(255, 251, 247, 0.97);
+
   /* Layout */
   --max-width:      1100px;
   --section-pad:    6rem 2rem;
@@ -50,6 +54,46 @@
 
   /* Transition shorthand */
   --ease: all 0.25s ease;
+}
+
+/* ── Dark theme ────────────────────────────────────────────── */
+/*
+  Applied when the user has selected dark mode (data-theme="dark"
+  on <html>) OR when their OS preference is dark and they haven't
+  made an explicit choice yet (data-theme="auto" / no attribute).
+  The anti-flash script in nuxt.config.js sets data-theme before
+  the page renders so there's no white flash.
+*/
+[data-theme="dark"] {
+  /* Backgrounds — very dark warm brown */
+  --bg-primary:   #160800;
+  --bg-secondary: #1e0d02;
+
+  /* Accent colors — slightly brighter for legibility on dark */
+  --orange: #ea580c;
+  --amber:  #d97706;
+  --red:    #ef4444;
+  --gold:   #eab308;
+  --teal:   #14b8a6;
+
+  /* Text */
+  --text-primary:   #fef3e8;  /* Warm off-white */
+  --text-secondary: #c9a98a;  /* Warm tan */
+  --text-muted:     #7c6450;  /* Muted warm brown */
+
+  /* Glassmorphism card — dark frosted glass */
+  --glass-bg:     rgba(30, 13, 2, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 4px 28px rgba(0, 0, 0, 0.4);
+
+  /* Tag chips — more visible on dark backgrounds */
+  --tag-bg:     rgba(234, 88, 12, 0.18);
+  --tag-border: rgba(234, 88, 12, 0.35);
+  --tag-color:  #fb923c;  /* orange-400, bright enough for dark bg */
+
+  /* Navigation backgrounds */
+  --nav-scrolled-bg: rgba(22, 8, 0, 0.92);
+  --nav-mobile-bg:   rgba(22, 8, 0, 0.98);
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -70,6 +114,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* Smooth transition when switching themes */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 img { max-width: 100%; display: block; }

@@ -19,6 +19,19 @@ export default defineNuxtConfig({
             'Personal website of Abel de Wit — AI Engineer, MSc student at Maastricht University, drone pilot and photographer.'
         }
       ],
+      // Anti-flash script: applies the saved theme BEFORE the page renders.
+      // Without this, dark-mode users would briefly see the light theme on load.
+      script: [
+        {
+          innerHTML: `(function(){
+            var t = localStorage.getItem('theme');
+            if (t) { document.documentElement.setAttribute('data-theme', t); return; }
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+              document.documentElement.setAttribute('data-theme', 'dark');
+          })()`,
+          type: 'text/javascript'
+        }
+      ],
       link: [
         // Preconnect to Google Fonts for faster loading
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
