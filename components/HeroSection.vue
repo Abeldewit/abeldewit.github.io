@@ -70,7 +70,7 @@
         >
           Get In Touch
         </a>
-        <a href="/cv.pdf" download class="btn btn-outline">
+        <a href="/Resume - Abel.pdf" download class="btn btn-outline">
           Download CV
         </a>
       </div>

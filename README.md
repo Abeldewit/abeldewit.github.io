@@ -31,7 +31,7 @@ Personal website built with [Nuxt 3](https://nuxt.com). Features a light theme w
 ├── public/
 │   ├── logos/                # Company/institution logos
 │   ├── gallery/              # Portfolio photos (add your own)
-│   └── cv.pdf                # CV download
+│   └── Resume - Abel.pdf                # CV download
 └── nuxt.config.js
 ```
 
