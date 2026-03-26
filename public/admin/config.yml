@@ -1,0 +1,167 @@
+backend:
+  name: github
+  repo: abeldewit/abeldewit.github.io
+  branch: main
+  auth_type: pkce
+  # Replace YOUR_CLIENT_ID below with the Client ID from your GitHub OAuth App.
+  # See setup instructions at the bottom of this file.
+  app_id: YOUR_CLIENT_ID
+
+# Where uploaded media (logos etc.) will be stored in the repo
+media_folder: "public/logos"
+public_folder: "/logos"
+
+collections:
+
+  # ── Hero Section ────────────────────────────────────────────────────────────
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - name: "roles"
+        label: "\"I am a…\" Roles"
+        file: "assets/data/roles.json"
+        format: json
+        fields:
+          - name: roles
+            label: Roles
+            label_singular: Role
+            widget: list
+            summary: "{{fields.item}}"
+            field:
+              name: item
+              label: Role
+              widget: string
+
+  # ── Jobs & Education ─────────────────────────────────────────────────────────
+  - name: "experience"
+    label: "Jobs & Education"
+    files:
+      - name: "jobs"
+        label: "Timeline entries"
+        file: "assets/data/jobs.json"
+        format: json
+        fields:
+          - name: items
+            label: Work & Education
+            label_singular: Entry
+            widget: list
+            summary: "{{fields.role}} @ {{fields.org}}"
+            fields:
+              - name: type
+                label: Type
+                widget: select
+                options: ["Work", "Education"]
+              - name: role
+                label: Role / Degree
+                widget: string
+              - name: org
+                label: Organisation
+                widget: string
+              - name: period
+                label: Period
+                widget: string
+                hint: 'e.g. "Oct 2024 – Present" or "2020 – 2022"'
+              - name: location
+                label: Location
+                widget: string
+              - name: color
+                label: Accent colour
+                widget: color
+                default: "#c2410c"
+              - name: logo
+                label: Logo path
+                widget: string
+                hint: 'Path relative to public/, e.g. "/logos/nfi.jpeg"'
+                required: false
+              - name: description
+                label: Description
+                widget: text
+              - name: tags
+                label: Tags
+                label_singular: Tag
+                widget: list
+                field:
+                  name: item
+                  label: Tag
+                  widget: string
+
+          - name: certs
+            label: Certifications
+            label_singular: Certification
+            widget: list
+            summary: "{{fields.name}} — {{fields.issuer}}"
+            fields:
+              - name: name
+                label: Certification name
+                widget: string
+              - name: issuer
+                label: Issuer
+                widget: string
+              - name: year
+                label: Year / Date
+                widget: string
+                hint: 'e.g. "Mar 2025" or "2024"'
+              - name: color
+                label: Accent colour
+                widget: color
+                default: "#c2410c"
+
+  # ── Projects ─────────────────────────────────────────────────────────────────
+  - name: "projects"
+    label: "Projects"
+    files:
+      - name: "projects"
+        label: "Project cards"
+        file: "assets/data/projects.json"
+        format: json
+        fields:
+          - name: projects
+            label: Projects
+            label_singular: Project
+            widget: list
+            summary: "{{fields.icon}} {{fields.title}}"
+            fields:
+              - name: icon
+                label: Icon (emoji)
+                widget: string
+              - name: title
+                label: Title
+                widget: string
+              - name: description
+                label: Description
+                widget: text
+                required: false
+              - name: gradient
+                label: Card gradient (CSS)
+                widget: string
+                hint: 'e.g. "linear-gradient(90deg, #c2410c, #b45309)"'
+              - name: github
+                label: GitHub URL
+                widget: string
+                required: false
+              - name: demo
+                label: Demo URL
+                widget: string
+                required: false
+                hint: 'Can be an external URL or an internal path like "/portfolio"'
+              - name: tags
+                label: Tags
+                label_singular: Tag
+                widget: list
+                field:
+                  name: item
+                  label: Tag
+                  widget: string
+
+# ── GitHub OAuth App setup ────────────────────────────────────────────────────
+# To use this CMS you need to create a GitHub OAuth App once:
+#
+# 1. Go to https://github.com/settings/developers → "OAuth Apps" → "New OAuth App"
+# 2. Fill in:
+#      Application name:    Portfolio CMS
+#      Homepage URL:        https://abeldewit.github.io
+#      Authorization callback URL:  https://abeldewit.github.io/admin/
+# 3. Click "Register application"
+# 4. Copy the "Client ID" and paste it as the `app_id` value at the top of this file.
+#    (No client secret is needed — PKCE flow is used.)
+# 5. Commit and push this file. The admin panel at /admin will now work.

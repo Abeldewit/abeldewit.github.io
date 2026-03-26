@@ -119,19 +119,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useReveal } from '~/composables/useReveal'
+import rolesData from '~/assets/data/roles.json'
 
 // ── Typing animation ──────────────────────────────────────────────────────────
 // Cycles through `roles` by typing and erasing each string character by character
-const roles = [
-  'Forensic Data Scientist',
-  'Dreamer',
-  'Photographer',
-  'Founder',
-  'Data Engineer',
-  'Tinkerer',
-  'Drone Pilot',
-  'Problem Solver'
-]
+const roles = rolesData.roles
 
 const displayedRole = ref('')  // Text currently shown on screen
 
