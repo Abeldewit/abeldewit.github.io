@@ -4,6 +4,7 @@ node_modules/
 # Nuxt build outputs
 .nuxt/
 .output/
+dist
 
 # Environment variables
 .env
