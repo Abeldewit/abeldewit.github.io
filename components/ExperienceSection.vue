@@ -131,15 +131,23 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useReveal } from '~/composables/useReveal'
 
 // Activate scroll-reveal for all .reveal elements in this section
 useReveal('#experience')
 
-// ── Timeline data ──────────────────────────────────────────────────────────
-// Edit this array to update your experience and education.
-// Items are shown top to bottom — put newest first.
-const items = [
+// ── Pocketbase: experiences ───────────────────────────────────────────────────
+// Collection: `experiences`
+// Fields: role, org, period, location, color, logo (file), type, order,
+//         description, tags (JSON array of strings)
+//
+// Collection: `certifications`
+// Fields: name, issuer, year, color, order
+//
+// Falls back to hardcoded data when Pocketbase is unreachable.
+
+const FALLBACK_ITEMS = [
   {
     type:        'Work',
     role:        'Forensic Data Scientist',
@@ -252,16 +260,52 @@ const items = [
   },
 ]
 
-// ── Certifications ─────────────────────────────────────────────────────────
-// Shown as compact badge cards below the timeline.
-// Add/remove entries to keep this list current.
-const certs = [
+const FALLBACK_CERTS = [
   { name: 'AI Agents Fundamentals',               issuer: 'Hugging Face',      year: 'Mar 2025', color: '#f59e0b' },
   { name: 'Professional Scrum Master™ I (PSM I)', issuer: 'Scrum.org',         year: 'Jan 2024', color: '#c2410c' },
   { name: 'Azure Fundamentals (AZ-900)',           issuer: 'Microsoft',         year: 'Apr 2023', color: '#0078d4' },
   { name: 'Databricks Lakehouse Fundamentals',    issuer: 'Databricks',        year: 'Apr 2023', color: '#e87722' },
   { name: 'Data Intelligence Track',              issuer: 'Capgemini Academy', year: 'Feb 2022', color: '#dc2626' },
 ]
+
+// ── Fetch from Pocketbase ─────────────────────────────────────────────────────
+const { data: pbExperiences } = await useAsyncData('experiences', async () => {
+  try {
+    const pb = usePb()
+    const records = await pb.collection('experiences').getFullList({ sort: 'order' })
+    return records.map(r => ({
+      type:        r.type,
+      role:        r.role,
+      org:         r.org,
+      period:      r.period,
+      location:    r.location,
+      color:       r.color,
+      logo:        r.logo ? pb.files.getURL(r, r.logo) : null,
+      description: r.description,
+      tags:        Array.isArray(r.tags) ? r.tags : [],
+    }))
+  } catch {
+    return null
+  }
+})
+
+const { data: pbCerts } = await useAsyncData('certifications', async () => {
+  try {
+    const pb = usePb()
+    const records = await pb.collection('certifications').getFullList({ sort: 'order' })
+    return records.map(r => ({
+      name:   r.name,
+      issuer: r.issuer,
+      year:   r.year,
+      color:  r.color,
+    }))
+  } catch {
+    return null
+  }
+})
+
+const items = computed(() => pbExperiences.value ?? FALLBACK_ITEMS)
+const certs = computed(() => pbCerts.value ?? FALLBACK_CERTS)
 </script>
 
 <style scoped>

@@ -70,7 +70,7 @@
         >
           Get In Touch
         </a>
-        <a href="/Resume - Abel.pdf" download class="btn btn-outline">
+        <a :href="resumeUrl" download class="btn btn-outline">
           Download CV
         </a>
       </div>
@@ -117,12 +117,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useReveal } from '~/composables/useReveal'
 
-// ── Typing animation ──────────────────────────────────────────────────────────
-// Cycles through `roles` by typing and erasing each string character by character
-const roles = [
+// ── Pocketbase: hero keywords ────────────────────────────────────────────────
+// Fetch from `hero_keywords` collection (fields: keyword, order).
+// Falls back to the hardcoded list when Pocketbase is unreachable.
+const FALLBACK_ROLES = [
   'Forensic Data Scientist',
   'Dreamer',
   'Photographer',
@@ -130,8 +131,37 @@ const roles = [
   'Data Engineer',
   'Tinkerer',
   'Drone Pilot',
-  'Problem Solver'
+  'Problem Solver',
 ]
+
+const { data: pbKeywords } = await useAsyncData('hero-keywords', async () => {
+  try {
+    const pb = usePb()
+    const records = await pb.collection('hero_keywords').getFullList({ sort: 'order' })
+    return records.length ? records.map(r => r.keyword) : null
+  } catch {
+    return null
+  }
+})
+
+const roles = computed(() => pbKeywords.value ?? FALLBACK_ROLES)
+
+// ── Pocketbase: resume download URL ──────────────────────────────────────────
+// Fetches the first record from the `resume` collection (fields: file).
+// Falls back to the static /public PDF if no record exists.
+const { data: resumeUrl } = await useAsyncData('resume-url', async () => {
+  try {
+    const pb = usePb()
+    const records = await pb.collection('resume').getFullList({ limit: 1 })
+    if (records.length && records[0].file) {
+      return pb.files.getURL(records[0], records[0].file)
+    }
+  } catch { /* fall through to default */ }
+  return '/Resume - Abel.pdf'
+})
+
+// ── Typing animation ──────────────────────────────────────────────────────────
+// Cycles through `roles` by typing and erasing each string character by character
 
 const displayedRole = ref('')  // Text currently shown on screen
 
@@ -141,7 +171,7 @@ let deleting  = false  // Are we erasing or typing?
 let timer     = null   // setTimeout handle
 
 function typeStep() {
-  const current = roles[roleIdx]
+  const current = roles.value[roleIdx]
 
   if (!deleting) {
     // Type one more character
@@ -162,7 +192,7 @@ function typeStep() {
     if (charIdx === 0) {
       // Finished erasing — move to next role
       deleting  = false
-      roleIdx   = (roleIdx + 1) % roles.length
+      roleIdx   = (roleIdx + 1) % roles.value.length
       timer     = setTimeout(typeStep, 400)  // short pause before next word
       return
     }

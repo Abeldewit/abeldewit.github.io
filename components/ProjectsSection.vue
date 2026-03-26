@@ -82,13 +82,19 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useReveal } from '~/composables/useReveal'
 
 useReveal('#projects')
 
-// ── Projects data ──────────────────────────────────────────────────────────
-// Add or edit entries here. `github` and `demo` can be null if not applicable.
-const projects = [
+// ── Pocketbase: projects ──────────────────────────────────────────────────────
+// Collection: `projects`
+// Fields: title, description, icon, gradient, github_url, demo_url,
+//         tags (JSON array of strings), order
+//
+// Falls back to the hardcoded list when Pocketbase is unreachable.
+
+const FALLBACK_PROJECTS = [
     {
     icon:        '🧬',
     title:       'DNANet',
@@ -144,6 +150,26 @@ const projects = [
     tags:        ['DJI', 'Aerial Photography', 'Video Editing', 'Creative'],
   },
 ]
+
+const { data: pbProjects } = await useAsyncData('projects', async () => {
+  try {
+    const pb = usePb()
+    const records = await pb.collection('projects').getFullList({ sort: 'order' })
+    return records.map(r => ({
+      icon:        r.icon,
+      title:       r.title,
+      description: r.description,
+      gradient:    r.gradient,
+      github:      r.github_url || null,
+      demo:        r.demo_url   || null,
+      tags:        Array.isArray(r.tags) ? r.tags : [],
+    }))
+  } catch {
+    return null
+  }
+})
+
+const projects = computed(() => pbProjects.value ?? FALLBACK_PROJECTS)
 </script>
 
 <style scoped>
