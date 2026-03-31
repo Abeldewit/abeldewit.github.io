@@ -6,10 +6,14 @@ export default defineNuxtConfig({
   // Show the Nuxt devtools overlay during development
   devtools: { enabled: true },
 
-  // Pocketbase URL — set NUXT_PUBLIC_POCKETBASE_URL in your environment.
-  // In development, defaults to localhost. In production on RPi, point this
-  // to your public Pocketbase URL (e.g. https://cms.yourdomain.com).
+  // Pocketbase URLs.
+  // pocketbaseInternalUrl — server-only, used by the Nuxt SSR process inside
+  //   Docker to reach Pocketbase over the internal network. Override with
+  //   NUXT_POCKETBASE_INTERNAL_URL (automatically mapped by Nuxt).
+  // public.pocketbaseUrl — browser-visible URL, used for rendered file links
+  //   (e.g. resume download). Override with NUXT_PUBLIC_POCKETBASE_URL.
   runtimeConfig: {
+    pocketbaseInternalUrl: '',
     public: {
       pocketbaseUrl: 'http://localhost:8090'
     }

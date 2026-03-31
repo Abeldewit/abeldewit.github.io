@@ -1,256 +1,187 @@
-# Self-Hosting on Raspberry Pi
+# Self-Hosting on Raspberry Pi with Docker
 
-This guide covers hosting the site on a Raspberry Pi 3/4/5 (64-bit OS) with Pocketbase as the CMS, Nginx as a reverse proxy, and Cloudflare Tunnel for secure public access.
-
----
+Everything runs in Docker containers — the only thing you need to install on the RPi is Docker itself.
 
 ## Architecture
 
 ```
-Internet → Cloudflare Tunnel → Nginx (RPi)
-                                 ├── port 3000 → Nuxt SSR (Node.js / PM2)
-                                 └── port 8090 → Pocketbase (CMS admin + API)
+Internet → Cloudflare edge → cloudflared (container)
+                                ├── yourdomain.com     → nuxt:3000
+                                └── cms.yourdomain.com → pocketbase:8090
+```
+
+Three containers on a shared internal network:
+- **nuxt** — Nuxt SSR app (your website)
+- **pocketbase** — headless CMS with a built-in admin UI
+- **cloudflared** — Cloudflare Tunnel daemon, connects outward to Cloudflare
+
+No ports are opened on the RPi. No Nginx. No firewall changes.
+
+---
+
+## 1. Install Docker on the RPi
+
+```bash
+sudo apt update
+sudo apt install -y docker.io docker-compose-plugin
+sudo usermod -aG docker $USER   # so you can run docker without sudo
+# log out and back in for the group change to take effect
 ```
 
 ---
 
-## 1. Install Node.js
+## 2. Set Up Cloudflare Tunnel
+
+You need a free Cloudflare account with your domain added.
+
+1. Go to [Cloudflare Zero Trust dashboard](https://one.dash.cloudflare.com/) → **Networks → Tunnels**
+2. Click **Create a tunnel** → give it a name (e.g. `rpi-site`) → **Save**
+3. Choose **Docker** as the connector — copy the displayed `docker run` command and extract the long token string from it (the value after `--token`)
+4. Under **Public Hostnames**, add two routes:
+
+   | Subdomain | Domain | Service |
+   |-----------|--------|---------|
+   | *(blank)* | yourdomain.com | `http://nuxt:3000` |
+   | `cms` | yourdomain.com | `http://pocketbase:8090` |
+
+5. Save — the DNS records are created automatically in Cloudflare.
+
+---
+
+## 3. Clone the Repo and Configure
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs
-node -v  # should be 20+
+git clone https://github.com/abeldewit/abeldewit.github.io.git ~/site
+cd ~/site
+cp .env.example .env
+```
+
+Edit `.env` and fill in the two values:
+
+```
+NUXT_PUBLIC_POCKETBASE_URL=https://cms.yourdomain.com
+CLOUDFLARE_TUNNEL_TOKEN=<token from step 2>
 ```
 
 ---
 
-## 2. Install PM2
+## 4. Start Everything
 
 ```bash
-sudo npm install -g pm2
+docker compose up -d --build
+```
+
+This builds the Nuxt image and starts all three containers. On first run it will pull the Pocketbase and Cloudflare images (~100 MB combined).
+
+Check that all containers are running:
+
+```bash
+docker compose ps
+docker compose logs -f   # Ctrl+C to exit
 ```
 
 ---
 
-## 3. Install Pocketbase
+## 5. Set Up Pocketbase
 
-Download the ARM64 binary from https://github.com/pocketbase/pocketbase/releases
-(look for `pocketbase_linux_arm64.zip`):
-
-```bash
-mkdir ~/pocketbase && cd ~/pocketbase
-wget https://github.com/pocketbase/pocketbase/releases/latest/download/pocketbase_linux_arm64.zip
-unzip pocketbase_linux_arm64.zip
-chmod +x pocketbase
-```
-
-Start it once to create the data directory and admin account:
-
-```bash
-./pocketbase serve
-# Visit http://<rpi-ip>:8090/_/ to create your admin account
-```
-
----
-
-## 4. Create Pocketbase Collections
-
-After logging into the admin UI at `http://<rpi-ip>:8090/_/`, create these collections:
+1. Visit `https://cms.yourdomain.com/_/` in your browser
+2. Create your admin account (first-time only)
+3. Create the following collections:
 
 ### `hero_keywords`
-| Field    | Type   | Notes                     |
-|----------|--------|---------------------------|
+| Field    | Type   | Notes                          |
+|----------|--------|--------------------------------|
 | keyword  | Text   | e.g. "Forensic Data Scientist" |
-| order    | Number | Controls display sequence |
+| order    | Number | Controls display sequence      |
 
 ### `experiences`
-| Field       | Type   | Notes                                      |
-|-------------|--------|--------------------------------------------|
-| type        | Text   | "Work" or "Education"                      |
-| role        | Text   | Job title / degree name                    |
-| org         | Text   | Company or institution                     |
-| period      | Text   | e.g. "Oct 2024 – Present"                  |
-| location    | Text   | e.g. "Amsterdam, Netherlands"              |
-| color       | Text   | Hex colour, e.g. "#c2410c"                 |
-| logo        | File   | Company/institution logo image             |
-| description | Text   | (Long text / editor)                       |
-| tags        | JSON   | Array of strings, e.g. `["Python","ML"]`   |
-| order       | Number | Controls display sequence (low = top)      |
+| Field       | Type      | Notes                                    |
+|-------------|-----------|------------------------------------------|
+| type        | Text      | "Work" or "Education"                    |
+| role        | Text      | Job title / degree name                  |
+| org         | Text      | Company or institution                   |
+| period      | Text      | e.g. "Oct 2024 – Present"                |
+| location    | Text      | e.g. "Amsterdam, Netherlands"            |
+| color       | Text      | Hex colour, e.g. "#c2410c"               |
+| logo        | File      | Company/institution logo image           |
+| description | Text      | Long text                                |
+| tags        | JSON      | Array of strings, e.g. `["Python","ML"]` |
+| order       | Number    | Controls display sequence (low = top)    |
 
 ### `certifications`
-| Field  | Type   | Notes                       |
-|--------|--------|-----------------------------|
-| name   | Text   | Certificate name            |
-| issuer | Text   | Issuing organisation        |
-| year   | Text   | e.g. "Mar 2025"             |
-| color  | Text   | Hex colour                  |
-| order  | Number | Controls display sequence   |
+| Field  | Type   | Notes                     |
+|--------|--------|---------------------------|
+| name   | Text   | Certificate name          |
+| issuer | Text   | Issuing organisation      |
+| year   | Text   | e.g. "Mar 2025"           |
+| color  | Text   | Hex colour                |
+| order  | Number | Controls display sequence |
 
 ### `projects`
-| Field       | Type   | Notes                                    |
-|-------------|--------|------------------------------------------|
-| icon        | Text   | Emoji, e.g. "🧬"                         |
-| title       | Text   |                                          |
-| description | Text   | (Long text)                              |
-| gradient    | Text   | CSS gradient string                      |
-| github_url  | URL    | Optional                                 |
-| demo_url    | URL    | Optional                                 |
-| tags        | JSON   | Array of strings                         |
-| order       | Number | Controls display sequence                |
+| Field       | Type   | Notes                         |
+|-------------|--------|-------------------------------|
+| icon        | Text   | Emoji, e.g. "🧬"              |
+| title       | Text   |                               |
+| description | Text   | Long text                     |
+| gradient    | Text   | CSS gradient string           |
+| github_url  | URL    | Optional                      |
+| demo_url    | URL    | Optional                      |
+| tags        | JSON   | Array of strings              |
+| order       | Number | Controls display sequence     |
 
 ### `resume`
-| Field | Type | Notes                              |
-|-------|------|------------------------------------|
-| file  | File | Upload your CV PDF here            |
-
-This is a single-record collection — only ever add one record. The site fetches the first record and links to the uploaded PDF.
+| Field | Type | Notes                                           |
+|-------|------|-------------------------------------------------|
+| file  | File | Upload your CV PDF here (one record only)       |
 
 ---
 
-## 5. Clone and Build the Site
+## 6. Local Development (without Docker)
 
 ```bash
-cd ~
-git clone https://github.com/abeldewit/abeldewit.github.io.git site
-cd site
-cp .env.example .env
-# Edit .env and set NUXT_PUBLIC_POCKETBASE_URL to your public Pocketbase URL
 npm install
-npm run build
+npm run dev
 ```
 
----
-
-## 6. Run with PM2
-
-Create an ecosystem file `~/ecosystem.config.cjs`:
-
-```js
-module.exports = {
-  apps: [
-    {
-      name: 'nuxt',
-      script: '.output/server/index.mjs',
-      cwd: '/home/<your-user>/site',
-      env: {
-        PORT: 3000,
-        NUXT_PUBLIC_POCKETBASE_URL: 'https://cms.yourdomain.com'
-      }
-    },
-    {
-      name: 'pocketbase',
-      script: './pocketbase',
-      cwd: '/home/<your-user>/pocketbase',
-      args: 'serve --http=0.0.0.0:8090'
-    }
-  ]
-}
-```
+Pocketbase can be run separately for local dev:
 
 ```bash
-pm2 start ~/ecosystem.config.cjs
-pm2 save
-pm2 startup  # follow the printed command to enable autostart on boot
+# Download the ARM64 binary from https://github.com/pocketbase/pocketbase/releases
+./pocketbase serve   # runs on http://localhost:8090
 ```
 
----
-
-## 7. Install Nginx
-
-```bash
-sudo apt install -y nginx
-```
-
-Create `/etc/nginx/sites-available/abeldewit`:
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-
-    # Nuxt SSR app
-    location / {
-        proxy_pass         http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header   Upgrade $http_upgrade;
-        proxy_set_header   Connection 'upgrade';
-        proxy_set_header   Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-
-server {
-    listen 80;
-    server_name cms.yourdomain.com;
-
-    # Pocketbase admin + API
-    location / {
-        proxy_pass         http://127.0.0.1:8090;
-        proxy_http_version 1.1;
-        proxy_set_header   Upgrade $http_upgrade;
-        proxy_set_header   Connection 'upgrade';
-        proxy_set_header   Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
-
-```bash
-sudo ln -s /etc/nginx/sites-available/abeldewit /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
----
-
-## 8. Cloudflare Tunnel
-
-1. Add your domain to Cloudflare (free plan is fine).
-2. Install `cloudflared` on the RPi:
-   ```bash
-   wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb
-   sudo dpkg -i cloudflared-linux-arm64.deb
-   ```
-3. Authenticate and create a tunnel:
-   ```bash
-   cloudflared tunnel login
-   cloudflared tunnel create my-site
-   ```
-4. Configure `~/.cloudflared/config.yml`:
-   ```yaml
-   tunnel: <tunnel-id>
-   credentials-file: /home/<user>/.cloudflared/<tunnel-id>.json
-
-   ingress:
-     - hostname: yourdomain.com
-       service: http://localhost:80
-     - hostname: cms.yourdomain.com
-       service: http://localhost:8090
-     - service: http_status:404
-   ```
-5. Create DNS records in Cloudflare dashboard (or via CLI):
-   ```bash
-   cloudflared tunnel route dns my-site yourdomain.com
-   cloudflared tunnel route dns my-site cms.yourdomain.com
-   ```
-6. Run the tunnel as a service:
-   ```bash
-   sudo cloudflared service install
-   sudo systemctl start cloudflared
-   ```
-
-Your site is now publicly accessible at `https://yourdomain.com` and the CMS at `https://cms.yourdomain.com/_/`.
+The site falls back to hardcoded content when Pocketbase is unreachable, so `npm run dev` works even without Pocketbase running.
 
 ---
 
 ## Deploying Updates
 
-After making code changes:
-
 ```bash
 cd ~/site
-git pull origin main
-npm install
-npm run build
-pm2 restart nuxt
+git pull
+docker compose up -d --build
+```
+
+Docker rebuilds the Nuxt image and restarts only the changed containers. Pocketbase data is preserved in the `pb_data` named volume.
+
+---
+
+## Useful Commands
+
+```bash
+# View running containers
+docker compose ps
+
+# Tail logs for a specific service
+docker compose logs -f nuxt
+docker compose logs -f pocketbase
+
+# Restart a single service
+docker compose restart nuxt
+
+# Stop everything
+docker compose down
+
+# Stop and remove the Pocketbase data volume (destructive — deletes all CMS content)
+docker compose down -v
 ```

@@ -1,0 +1,53 @@
+services:
+
+  # ── Nuxt SSR ──────────────────────────────────────────────────────────────
+  nuxt:
+    build: .
+    environment:
+      NODE_ENV: production
+      # Internal URL used by the Nuxt SSR process to reach Pocketbase over the
+      # Docker network — never exposed to the browser.
+      NUXT_POCKETBASE_INTERNAL_URL: http://pocketbase:8090
+      # Public URL used in rendered HTML (e.g. resume download link).
+      # Must be browser-accessible. Set in your .env file.
+      NUXT_PUBLIC_POCKETBASE_URL: ${NUXT_PUBLIC_POCKETBASE_URL}
+    depends_on:
+      - pocketbase
+    networks:
+      - app-net
+    restart: unless-stopped
+
+  # ── Pocketbase CMS ────────────────────────────────────────────────────────
+  # ghcr.io/muchobien/pocketbase is a community multi-arch image (amd64 + arm64)
+  # and works on both RPi and regular servers.
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    volumes:
+      # pb_data persists the SQLite database and all uploaded files (logos,
+      # resume PDF, etc.) across container restarts and re-builds.
+      - pb_data:/pb/pb_data
+    networks:
+      - app-net
+    restart: unless-stopped
+
+  # ── Cloudflare Tunnel ─────────────────────────────────────────────────────
+  # Connects outward to Cloudflare's edge — no inbound ports needed on the RPi.
+  # Routing rules (which hostname → which service) are configured in the
+  # Cloudflare Zero Trust dashboard, not here.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - nuxt
+      - pocketbase
+    networks:
+      - app-net
+    restart: unless-stopped
+
+volumes:
+  pb_data:
+
+networks:
+  app-net:
