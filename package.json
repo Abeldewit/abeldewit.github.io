@@ -9,7 +9,7 @@
     "deploy": "nuxt generate && gh-pages -d .output/public"
   },
   "devDependencies": {
-    "nuxt": "^3.13.0",
+    "nuxt": "^3.21.6",
     "gh-pages": "^6.0.0"
   }
 }
